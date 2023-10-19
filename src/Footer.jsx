@@ -5,7 +5,7 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import YouTubeIcon from '@mui/icons-material/YouTube';
-import logo from './images/LOGO.png'
+import logo from './images/logo.png'
 
 const Footer = () => {
   return (
