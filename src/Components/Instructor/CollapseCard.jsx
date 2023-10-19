@@ -26,7 +26,7 @@ const CollapseCard = (props) => {
   const deleteVideo = async (id) => {
     let bodyContent = JSON.stringify({ "courseid": id, });
 
-    let response = await fetch(`http://localhost:3000/instructor/course/deletecourse/${courseid}`, {
+    let response = await fetch(`https://study-sphere-backend.onrender.com/instructor/course/deletecourse/${courseid}`, {
       headers: {
         "Content-type": 'application/json',
         authorization: `bearer ${JSON.parse(localStorage.getItem('instructor_token'))}`
@@ -40,7 +40,7 @@ const CollapseCard = (props) => {
   const deleteCourseVideo = async (id) => {
     let bodyContent = JSON.stringify({ "id": id, });
 
-    let response = await fetch(`http://localhost:3000/instructor/deletevideo/${id}`, {
+    let response = await fetch(`https://study-sphere-backend.onrender.com/instructor/deletevideo/${id}`, {
       headers: {
         "Content-type": 'application/json',
         authorization: `bearer ${JSON.parse(localStorage.getItem('instructor_token'))}`

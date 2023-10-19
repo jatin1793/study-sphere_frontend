@@ -29,7 +29,7 @@ function UploadForm() {
     formData.set('videodescription', videodescription)
     formData.set('videotitle', videotitle)
 
-    let response = await fetch(`http://localhost:3000/instructor/uploadvideo/${courseid}`, {
+    let response = await fetch(`https://study-sphere-backend.onrender.com/instructor/uploadvideo/${courseid}`, {
       headers: {
         authorization: `bearer ${JSON.parse(localStorage.getItem('instructor_token'))}`
       },

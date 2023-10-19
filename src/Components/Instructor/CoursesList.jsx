@@ -13,7 +13,7 @@ const CoursesList = () => {
     const [data, setdata] = useState([]);
 
     async function fetchData() {
-        let response = await fetch("http://localhost:3000/instructor/mycourses", {
+        let response = await fetch("https://study-sphere-backend.onrender.com/instructor/mycourses", {
             headers: {
                 authorization: `bearer ${JSON.parse(localStorage.getItem('instructor_token'))}`
             }

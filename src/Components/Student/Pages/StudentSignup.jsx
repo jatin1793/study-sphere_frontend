@@ -35,7 +35,7 @@ const Studentsignin = () => {
     }
     else {
       try {
-        const response = await axios.post('http://localhost:3000/student/register', {
+        const response = await axios.post('https://study-sphere-backend.onrender.com/student/register', {
           phone, email, name, password, institution, qualification, course
         }).then((response) => {
           if (response.data.alreadyExists) {
@@ -66,7 +66,7 @@ const Studentsignin = () => {
     }
     else {
       try {
-        let response = await fetch('http://localhost:3000/student/login', {
+        let response = await fetch('https://study-sphere-backend.onrender.com/student/login', {
           method: 'post',
           body: JSON.stringify({ email, password }),
           headers: {

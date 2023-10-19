@@ -27,7 +27,7 @@ const CourseVideos = () => {
     const sendIDtoserver = async () => {
         let bodyContent = JSON.stringify({ "courseid": id, });
 
-        let status = await fetch(`http://localhost:3000/student/checkifenrolled/${id}`, {
+        let status = await fetch(`/student/checkifenrolled/${id}`, {
             headers: {
                 "Content-Type": "application/json",
                 authorization: `bearer ${JSON.parse(localStorage.getItem('student_token'))}`
@@ -39,7 +39,7 @@ const CourseVideos = () => {
         dispatch(setEnrollmentStatus(e.isEnrolled));
         setcheckenroll(e.isEnrolled);
 
-        let response = await fetch(`http://localhost:3000/student/course/${id}`, {
+        let response = await fetch(`https://study-sphere-backend.onrender.com/student/course/${id}`, {
             headers: {
                 "Content-Type": "application/json",
                 authorization: `bearer ${JSON.parse(localStorage.getItem('student_token'))}`
@@ -55,7 +55,7 @@ const CourseVideos = () => {
         let bodyContent = JSON.stringify({ "courseid": id, });
 
         try {
-            let response = await fetch(`http://localhost:3000/student/joincourse/${id}`, {
+            let response = await fetch(`https://study-sphere-backend.onrender.com/student/joincourse/${id}`, {
                 headers: {
                     "Content-Type": "application/json",
                     authorization: `bearer ${JSON.parse(localStorage.getItem('student_token'))}`

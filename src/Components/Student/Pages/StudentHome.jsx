@@ -45,7 +45,7 @@ const StudentHome = () => {
 
   async function fetchData() {
     try {
-      let response = await fetch("http://localhost:3000/student/home", {
+      let response = await fetch("https://study-sphere-backend.onrender.com/student/home", {
         method: 'post',
         headers: {
           authorization: `bearer ${JSON.parse(localStorage.getItem('student_token'))}`
@@ -91,7 +91,7 @@ const StudentHome = () => {
       "id": id,
     });
 
-    let response = await fetch(`http://localhost:3000/student/follow/${id}`, {
+    let response = await fetch(`https://study-sphere-backend.onrender.com/student/follow/${id}`, {
       headers: {
         "Content-Type": "application/json",
         authorization: `bearer ${JSON.parse(localStorage.getItem('student_token'))}`

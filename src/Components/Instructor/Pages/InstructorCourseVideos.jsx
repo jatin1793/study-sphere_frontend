@@ -22,7 +22,7 @@ const CourseVideos = () => {
     const sendIDtoserver = async () => {
         let bodyContent = JSON.stringify({ "courseid": id, });
 
-        let response = await fetch(`http://localhost:3000/instructor/course/${id}`, {
+        let response = await fetch(`https://study-sphere-backend.onrender.com/instructor/course/${id}`, {
             headers: {
                 "Content-Type": "application/json",
                 authorization: `bearer ${JSON.parse(localStorage.getItem('instructor_token'))}`

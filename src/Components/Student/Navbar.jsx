@@ -38,7 +38,7 @@ const Navbars = (props) => {
 
   async function fetchData() {
     try {
-      let response = await fetch("http://localhost:3000/student/details", {
+      let response = await fetch("https://study-sphere-backend.onrender.com/student/details", {
         method: "post",
         headers: {
           "Content-type": "application/json",

@@ -23,7 +23,7 @@ const Videoplayer = () => {
     const sendIDtoserver = async () => {
         let bodyContent = JSON.stringify({ "videoid": videoid, });
 
-        let response = await fetch(`http://localhost:3000/student/video/${videoid}`, {
+        let response = await fetch(`https://study-sphere-backend.onrender.com/student/video/${videoid}`, {
             headers: {
                 "Content-Type": "application/json",
                 authorization: `bearer ${JSON.parse(localStorage.getItem('student_token'))}`

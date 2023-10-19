@@ -36,7 +36,7 @@ const InstrunctorSignUp = () => {
     }
     else {
       try {
-        const response = await axios.post('http://localhost:3000/instructor/register', {
+        const response = await axios.post('https://study-sphere-backend.onrender.com/instructor/register', {
           phone, email, name, password, qualification, experience, domain
         })
           .then((response) => {
@@ -68,7 +68,7 @@ const InstrunctorSignUp = () => {
     }
     else {
       try {
-        let response = await fetch('http://localhost:3000/instructor/login', {
+        let response = await fetch('https://study-sphere-backend.onrender.com/instructor/login', {
           method: 'post',
           body: JSON.stringify({ email, password }),
           headers: {

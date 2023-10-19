@@ -20,7 +20,7 @@ const ProfilePage = () => {
   const [data, setdata] = useState([]);
   async function fetchData() {
     try {
-      let response = await fetch("http://localhost:3000/student/details", {
+      let response = await fetch("https://study-sphere-backend.onrender.com/student/details", {
         method: "post",
         headers: {
           "Content-type": "application/json",
@@ -60,7 +60,7 @@ const ProfilePage = () => {
     const formData = new FormData();
     formData.set("file", profileimage);
 
-    let response = await fetch("http://localhost:3000/student/profileimg", {
+    let response = await fetch("https://study-sphere-backend.onrender.com/student/profileimg", {
       headers: {
         authorization: `bearer ${JSON.parse(
           localStorage.getItem("student_token")

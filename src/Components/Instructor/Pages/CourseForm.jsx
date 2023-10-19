@@ -26,7 +26,7 @@ const CourseForm = () => {
     formData.set('courseDomain', data.courseDomain)
     formData.set('courseDescription', data.courseDomain)
 
-    let response = await fetch("http://localhost:3000/instructor/createcourse", {
+    let response = await fetch("https://study-sphere-backend.onrender.com/instructor/createcourse", {
       headers: {
         authorization: `bearer ${JSON.parse(localStorage.getItem('instructor_token'))}`
       },

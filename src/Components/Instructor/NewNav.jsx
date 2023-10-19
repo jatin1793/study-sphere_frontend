@@ -33,7 +33,7 @@ const NewNav = (props) => {
 
   const submitHandler = async () => {
     const { username } = data;
-    let response = await fetch('http://localhost:3000/instructor/update', {
+    let response = await fetch('https://study-sphere-backend.onrender.com/instructor/update', {
       method: 'post',
       headers: {
         'Content-Type': 'application/json',
