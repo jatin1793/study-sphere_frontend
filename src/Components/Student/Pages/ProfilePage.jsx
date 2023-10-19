@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import Navbar from "../Navbar";
+import Navbar from "../Navbar.jsx";
 import { Card, CardHeader, CardBody, Typography, Button, } from "@material-tailwind/react";
 import { Dialog, Select, CardFooter, Input, Checkbox, } from "@material-tailwind/react";
 import { DialogHeader, DialogBody, DialogFooter, } from "@material-tailwind/react";

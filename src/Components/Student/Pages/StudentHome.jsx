@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import "../../../../src/index.css"
-import Navbar from '../Navbar'
-import CourseCard from '../CourseCard'
+import Navbar from '../Navbar.jsx'
+import CourseCard from '../CourseCard.jsx'
 import Footer from '../../../Footer.jsx'
 import { Card, CardHeader, CardBody, CardFooter, Typography, Button, } from "@material-tailwind/react";
 import { Avatar } from "@material-tailwind/react";

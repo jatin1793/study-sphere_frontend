@@ -6,7 +6,7 @@ import '../../../index.css'
 import toast from 'react-hot-toast'
 
 import Loader from '../../../Loader.jsx';
-import Navbar from '../Navbar'
+import Navbar from '../Navbar.jsx'
 import { setEnrollmentStatus } from '../../../store/reducers/enrollmentSlice.js';
 
 import { Button } from "@material-tailwind/react";

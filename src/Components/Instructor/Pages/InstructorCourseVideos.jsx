@@ -4,8 +4,8 @@ import '../../../index.css'
 
 import toast from 'react-hot-toast'
 
-import Loader from '../../../Loader';
-import NewNav from '../NewNav'
+import Loader from '../../../Loader.jsx';
+import NewNav from '../NewNav.jsx'
 
 import { Button } from "@material-tailwind/react";
 

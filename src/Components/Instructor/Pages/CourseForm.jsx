@@ -4,7 +4,7 @@ import '../../../index.css'
 import toast from 'react-hot-toast'
 import { ArrowUpTrayIcon } from "@heroicons/react/24/solid";
 import { Card, Textarea, Input, Button, Typography, } from "@material-tailwind/react";
-import NewNav from '../NewNav';
+import NewNav from '../NewNav.jsx';
 
 const CourseForm = () => {
 

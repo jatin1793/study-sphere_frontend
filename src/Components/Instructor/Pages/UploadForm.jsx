@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
-import NewNav from '../NewNav'
+import NewNav from '../NewNav.jsx'
 
 import toast from 'react-hot-toast'
 

@@ -6,8 +6,8 @@ import 'vidstack/styles/defaults.css';
 import 'vidstack/styles/community-skin/video.css';
 import { MediaCommunitySkin, MediaOutlet, MediaPlayer, MediaPoster } from '@vidstack/react';
 
-import NewNav from '../NewNav'
-import Loader from '../../../Loader';
+import NewNav from '../NewNav.jsx'
+import Loader from '../../../Loader.jsx';
 
 import { Avatar } from "@material-tailwind/react";
 
