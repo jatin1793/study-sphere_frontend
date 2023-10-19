@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import "../../index.css"
 
-import logo from '../../images/LOGO.png'
+import logo from '../../images/logo.png'
 
 import { Dialog } from "@material-tailwind/react";
 import { IconButton, SpeedDial, SpeedDialHandler, SpeedDialContent, SpeedDialAction, Typography, } from "@material-tailwind/react";
