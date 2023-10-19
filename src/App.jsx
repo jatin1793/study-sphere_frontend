@@ -1,7 +1,7 @@
 import React from 'react'
 import { Routes, Route } from 'react-router-dom'
 
-import Landing from './components/Landing.jsx'
+import Landing from './Components/Landing.jsx'
 import Notfound from './Components/Notfound.jsx';
 import Test from './Components/Test.jsx';
 
