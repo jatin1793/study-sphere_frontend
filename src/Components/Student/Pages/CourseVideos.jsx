@@ -50,63 +50,7 @@ const CourseVideos = () => {
         setcoursedata(response.data)
     }
 
-    const initializeRazorpay = async (order_id) => {
-        const res = await loadScript('https://checkout.razorpay.com/v1/checkout.js')
-
-        const options = {
-            key: 'rzp_test_KWOIl1E1t3eaDU',
-            amount: coursedata.coursePrice * 100,
-            currency: 'INR',
-            name: coursedata.courseTitle,
-            order_id: order_id,
-            handler: function (response) {
-                alert(response.razorpay_payment_id);
-                alert(response.razorpay_order_id);
-                alert(response.razorpay_signature);
-                setcheckenroll(e.isEnrolled);
-
-                const verifyPayment = async () => {
-                    try {
-                        const verifyResponse = await baseUrl.post('/api/payment/verify', JSON.stringify({ response }), {
-                            headers: {
-                                'Content-Type': 'application/json',
-                            },
-                        });
-
-                        if (verifyResponse.data.signatureIsValid === 'true') {
-                        } else {
-                            alert('Sorry payment failed !!');
-                        }
-                    } catch (error) {
-                        console.error('Error verifying payment:', error);
-                    }
-                };
-
-                verifyPayment();
-            },
-            prefill: {
-                name: 'Gaurav Kumar',
-                email: 'gaurav.kumar@example.com',
-                contact: '9000090000',
-            },
-            notes: {
-                address: 'Razorpay Corporate Office',
-            },
-            theme: {
-                color: '#3399cc',
-            },
-        };
-
-        const rzp1 = new Razorpay(options);
-
-        rzp1.on('payment.failed', function (response) {
-            alert(response.error.description);
-        });
-
-        document.getElementById('rzp-button1').onclick = function (e) {
-            rzp1.open();
-            e.preventDefault();
-        };
+    
     };
 
     const enrollhandler = async () => {
@@ -140,25 +84,6 @@ const CourseVideos = () => {
             setisLoading(false);
         }, 1200);
         sendIDtoserver();
-
-        const createOrder = async () => {
-            try {
-                const response = await baseUrl.post('/create/orderId', JSON.stringify({ amount: coursedata.coursePrice }), {
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                });
-                if (response.data.id) {
-                    setOrderId(response.data.id);
-                    initializeRazorpay(response.data.id);
-                } else {
-                    console.log('Failed to create an order.');
-                }
-            } catch (error) {
-                console.log('Error:', error);
-            }
-        };
-        createOrder();
     }, [])
 
 
@@ -177,7 +102,7 @@ const CourseVideos = () => {
                                 <h3 className='mt-6 text-[2.5vh] text-gray-700'>{coursedata.courseDescription}</h3>
                                 <h6>{enrollmentStatus}</h6>
                                 {checkenroll ?
-                                    <Button id="rzp-button1" onClick={enrollhandler} className='w-max font-[gilroy] bg-[#ff723f] mt-4'>Start for free</Button>
+                                    <Button onClick={enrollhandler} className='w-max font-[gilroy] bg-[#ff723f] mt-4'>Start for free</Button>
                                     :
                                     <Button onClick={enrollhandler} className='w-max font-[gilroy] bg-[#69D645] mt-4'>Enrolled</Button>
                                 }
