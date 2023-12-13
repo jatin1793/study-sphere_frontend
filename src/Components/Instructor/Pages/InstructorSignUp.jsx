@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios';
+import baseUrl from '../../../utils/baseUrl.js';
 
 import logo from '../../../images/logo.png'
 import instructor from '../../../images/instructor.png'
@@ -34,9 +35,19 @@ const InstrunctorSignUp = () => {
     if (!phone || !email || !name || !password || !qualification || !experience || !domain) {
       toast.error("Fill in all required fields !!! ")
     }
+    else if(phone.length > 10 || phone.length < 10 ){
+      toast.error("Phone number should be of 10 digits.")
+    }
+    else if(name.length > 15 || name.length < 6 ){
+      toast.error("Name should be in range of 6 to 15 chaacters. ")
+    }
+    else if(password.length > 15 || password.length < 6 ){
+      toast.error("Password should be in range of 6 to 15 chaacters. ")
+    }
+    
     else {
       try {
-        const response = await axios.post('https://study-sphere-backend.onrender.com/instructor/register', {
+        const response = await baseUrl.post('/instructor/register', {
           phone, email, name, password, qualification, experience, domain
         })
           .then((response) => {
@@ -62,40 +73,32 @@ const InstrunctorSignUp = () => {
   async function loginInstructor(e) {
     e.preventDefault();
     const { email, password } = loginInput;
-
+  
     if (!email || !password) {
-      toast.error("Fill in all required fields !!! ")
-    }
+      toast.error("Fill in all required fields !!!");
+    } 
     else {
       try {
-        let response = await fetch('https://study-sphere-backend.onrender.com/instructor/login', {
-          method: 'post',
-          body: JSON.stringify({ email, password }),
-          headers: {
-            'Content-Type': 'application/json',
-          }
+        const response = await baseUrl.post('/instructor/login', {
+          email,
+          password,
         });
-        response = await response.json();
-
-        if (response.instructor_token) {
-          localStorage.setItem('instructor_user', JSON.stringify(response.user));
-          localStorage.setItem('instructor_token', JSON.stringify(response.instructor_token))
-          navigate(`/instructor/home`)
+  
+        if (response.data.instructor_token) {
+          localStorage.setItem('instructor_user', JSON.stringify(response.data.user));
+          localStorage.setItem('instructor_token', JSON.stringify(response.data.instructor_token));
+          navigate(`/instructor/home`);
+        } else if (!response.data.InstructorExists && !response.data.passCheck) {
+          toast.error("Instructor doesn't exist with this email!!");
+        } else if (response.data.InstructorExists && !response.data.passCheck) {
+          toast.error("Incorrect password!!");
         }
-        if (!response.InstructorExists && !response.passCheck) {
-          toast.error("Instructor doesn't exists with this email !!")
-        }
-        else if (response.InstructorExists && !response.passCheck) {
-          toast.error("Incorrect password !!")
-        }
-
-      }
-      catch (error) {
+      } catch (error) {
         alert(error);
       }
     }
-
   }
+  
 
   useEffect(() => {
     setisLoading(true);

@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import "../../../../src/index.css"
+import baseUrl from '../../../utils/baseUrl.js'
 import Navbar from '../Navbar.jsx'
 import CourseCard from '../CourseCard.jsx'
 import Footer from '../../../Footer.jsx'
@@ -45,16 +46,13 @@ const StudentHome = () => {
 
   async function fetchData() {
     try {
-      let response = await fetch("https://study-sphere-backend.onrender.com/student/home", {
-        method: 'post',
+      let response = await baseUrl.post("/student/home", {}, {
         headers: {
           authorization: `bearer ${JSON.parse(localStorage.getItem('student_token'))}`
         }
       });
-      response = await response.json();
-      console.log(response)
-      setcourses(response.courses)
-      setinstructors(response.instructors)
+      setcourses(response.data.courses)
+      setinstructors(response.data.instructors)
     } catch (error) {
       console.log(error);
     }
@@ -91,16 +89,13 @@ const StudentHome = () => {
       "id": id,
     });
 
-    let response = await fetch(`https://study-sphere-backend.onrender.com/student/follow/${id}`, {
+    let response = await baseUrl.post(`/student/follow/${id}`, bodyContent, {
       headers: {
         "Content-Type": "application/json",
         authorization: `bearer ${JSON.parse(localStorage.getItem('student_token'))}`
       },
-      method: "post",
-      body: bodyContent
     });
-    let d = await response.json();
-    setisfollowed(d.isfollowed)
+    setisfollowed(response.data.isfollowed)
   }
 
 

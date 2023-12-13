@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import '../../../index.css'
-
+import baseUrl from '../../../utils/baseUrl.js';
 import toast from 'react-hot-toast'
 
 import Loader from '../../../Loader.jsx';
@@ -13,6 +13,11 @@ import { Button } from "@material-tailwind/react";
 
 import PlayCircleIcon from '@mui/icons-material/PlayCircle';
 
+function loadScript(src) {
+    const script = document.createElement('script')
+    script.src = src
+    script.onload = document.body.appendChild(script);
+}
 
 const CourseVideos = () => {
 
@@ -27,47 +32,97 @@ const CourseVideos = () => {
     const sendIDtoserver = async () => {
         let bodyContent = JSON.stringify({ "courseid": id, });
 
-        let status = await fetch(`/student/checkifenrolled/${id}`, {
+        let status = await baseUrl.post(`/student/checkifenrolled/${id}`, bodyContent, {
             headers: {
                 "Content-Type": "application/json",
                 authorization: `bearer ${JSON.parse(localStorage.getItem('student_token'))}`
             },
-            method: "post",
-            body: bodyContent
         });
-        let e = await status.json();
-        dispatch(setEnrollmentStatus(e.isEnrolled));
-        setcheckenroll(e.isEnrolled);
+        dispatch(setEnrollmentStatus(status.data.isEnrolled));
+        setcheckenroll(status.data.isEnrolled);
 
-        let response = await fetch(`https://study-sphere-backend.onrender.com/student/course/${id}`, {
+        let response = await baseUrl.post(`/student/course/${id}`, bodyContent, {
             headers: {
                 "Content-Type": "application/json",
                 authorization: `bearer ${JSON.parse(localStorage.getItem('student_token'))}`
             },
-            method: "post",
-            body: bodyContent
         });
-        let d = await response.json();
-        setcoursedata(d)
+        setcoursedata(response.data)
     }
+
+    const initializeRazorpay = async (order_id) => {
+        const res = await loadScript('https://checkout.razorpay.com/v1/checkout.js')
+
+        const options = {
+            key: 'rzp_test_KWOIl1E1t3eaDU',
+            amount: coursedata.coursePrice * 100,
+            currency: 'INR',
+            name: coursedata.courseTitle,
+            order_id: order_id,
+            handler: function (response) {
+                alert(response.razorpay_payment_id);
+                alert(response.razorpay_order_id);
+                alert(response.razorpay_signature);
+                setcheckenroll(e.isEnrolled);
+
+                const verifyPayment = async () => {
+                    try {
+                        const verifyResponse = await baseUrl.post('/api/payment/verify', JSON.stringify({ response }), {
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                        });
+
+                        if (verifyResponse.data.signatureIsValid === 'true') {
+                        } else {
+                            alert('Sorry payment failed !!');
+                        }
+                    } catch (error) {
+                        console.error('Error verifying payment:', error);
+                    }
+                };
+
+                verifyPayment();
+            },
+            prefill: {
+                name: 'Gaurav Kumar',
+                email: 'gaurav.kumar@example.com',
+                contact: '9000090000',
+            },
+            notes: {
+                address: 'Razorpay Corporate Office',
+            },
+            theme: {
+                color: '#3399cc',
+            },
+        };
+
+        const rzp1 = new Razorpay(options);
+
+        rzp1.on('payment.failed', function (response) {
+            alert(response.error.description);
+        });
+
+        document.getElementById('rzp-button1').onclick = function (e) {
+            rzp1.open();
+            e.preventDefault();
+        };
+    };
 
     const enrollhandler = async () => {
         let bodyContent = JSON.stringify({ "courseid": id, });
-
         try {
-            let response = await fetch(`https://study-sphere-backend.onrender.com/student/joincourse/${id}`, {
+            let response = await baseUrl.post(`/student/joincourse/${id}`, bodyContent, {
                 headers: {
                     "Content-Type": "application/json",
                     authorization: `bearer ${JSON.parse(localStorage.getItem('student_token'))}`
                 },
-                method: "post",
-                body: bodyContent
             });
-            let e = await response.json();
-            if (e.isEnrolled) {
+            if (response.data.isEnrolled) {
                 toast.error("Disenrolled successfully !!")
             }
             else {
+                initializeRazorpay();
                 toast.success("Enrolled successfully !!")
             }
             setcheckenroll(e.isEnrolled);
@@ -77,13 +132,36 @@ const CourseVideos = () => {
         }
     }
 
+    const [orderId, setOrderId] = useState(null);
+
     useEffect(() => {
         setisLoading(true);
         setTimeout(() => {
             setisLoading(false);
         }, 1200);
         sendIDtoserver();
+
+        const createOrder = async () => {
+            try {
+                const response = await baseUrl.post('/create/orderId', JSON.stringify({ amount: coursedata.coursePrice }), {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                });
+                if (response.data.id) {
+                    setOrderId(response.data.id);
+                    initializeRazorpay(response.data.id);
+                } else {
+                    console.log('Failed to create an order.');
+                }
+            } catch (error) {
+                console.log('Error:', error);
+            }
+        };
+        createOrder();
     }, [])
+
+
 
     return (
 
@@ -99,7 +177,7 @@ const CourseVideos = () => {
                                 <h3 className='mt-6 text-[2.5vh] text-gray-700'>{coursedata.courseDescription}</h3>
                                 <h6>{enrollmentStatus}</h6>
                                 {checkenroll ?
-                                    <Button onClick={enrollhandler} className='w-max font-[gilroy] bg-[#ff723f] mt-4'>Start for free</Button>
+                                    <Button id="rzp-button1" onClick={enrollhandler} className='w-max font-[gilroy] bg-[#ff723f] mt-4'>Start for free</Button>
                                     :
                                     <Button onClick={enrollhandler} className='w-max font-[gilroy] bg-[#69D645] mt-4'>Enrolled</Button>
                                 }

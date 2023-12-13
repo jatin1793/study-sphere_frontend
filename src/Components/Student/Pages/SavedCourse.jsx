@@ -3,6 +3,7 @@ import Navbar from '../Navbar.jsx'
 import Loader from '../../../Loader.jsx';
 import Footer from '../../../Footer.jsx';
 import CourseCard from '../CourseCard.jsx'
+import baseUrl from '../../../utils/baseUrl.js';
 
 const SavedCourse = () => {
   const [isLoading, setisLoading] = useState(false)
@@ -10,8 +11,7 @@ const SavedCourse = () => {
 
   async function fetchData() {
     try {
-      let response = await fetch("http://localhost:3000/student/details", {
-        method: "post",
+      let response = await baseUrl.post("/student/details", {}, {
         headers: {
           "Content-type": "application/json",
           authorization: `bearer ${JSON.parse(
@@ -19,9 +19,7 @@ const SavedCourse = () => {
           )}`,
         },
       });
-      response = await response.json();
-      console.log(response);
-      setdata(response.joinedcourses);
+      setdata(response.data.joinedcourses);
     } catch (error) {
       console.log(error);
     }

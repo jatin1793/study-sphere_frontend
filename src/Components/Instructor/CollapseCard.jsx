@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom';
-
+import baseUrl from '../../utils/baseUrl.js'
 import { Collapse, Button, Card, Typography, CardBody, } from "@material-tailwind/react";
 import { CardHeader, CardFooter } from "@material-tailwind/react";
 
@@ -24,23 +24,20 @@ const CollapseCard = (props) => {
   const toggleOpen = () => setOpen((cur) => !cur);
 
   const deleteVideo = async (id) => {
-    let bodyContent = JSON.stringify({ "courseid": id, });
-
-    let response = await fetch(`https://study-sphere-backend.onrender.com/instructor/course/deletecourse/${courseid}`, {
+    const response = await baseUrl.delete(`/instructor/course/deletecourse/${courseid}`, {
       headers: {
         "Content-type": 'application/json',
         authorization: `bearer ${JSON.parse(localStorage.getItem('instructor_token'))}`
       },
-      method: "delete",
-      body: bodyContent
+      data: { courseid: id }
     });
-    let d = await response.json();
+    let d = response.data;
   }
 
   const deleteCourseVideo = async (id) => {
     let bodyContent = JSON.stringify({ "id": id, });
 
-    let response = await fetch(`https://study-sphere-backend.onrender.com/instructor/deletevideo/${id}`, {
+    let response = await fetch(`http://localhost:3000/instructor/deletevideo/${id}`, {
       headers: {
         "Content-type": 'application/json',
         authorization: `bearer ${JSON.parse(localStorage.getItem('instructor_token'))}`
@@ -54,18 +51,18 @@ const CollapseCard = (props) => {
   return (
     <div>
       <Card className="w-[70rem] z-[9999] static flex-row">
-          <CardHeader
-            shadow={false} floated={false}
-            className="m-0 static w-2/5 shrink-0 rounded-r-none cursor-pointer"
-          >
-        <Link to={`/instructor/course/${props.courseid}`}>
+        <CardHeader
+          shadow={false} floated={false}
+          className="m-0 static w-2/5 shrink-0 rounded-r-none cursor-pointer"
+        >
+          <Link to={`/instructor/course/${props.courseid}`}>
             <img
               src={props.courseposter}
               alt="card-image"
               className="h-full w-full object-cover"
             />
-        </Link>
-          </CardHeader>
+          </Link>
+        </CardHeader>
 
         <div className='flex flex-col justify-between'>
           <CardBody>

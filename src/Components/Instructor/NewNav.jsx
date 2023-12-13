@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import '../../index.css'
-
+import baseUrl from '../../utils/baseUrl';
 import logo from '../../images/logo.png'
 
 import { Dialog, CardHeader, CardBody, CardFooter, Checkbox, } from "@material-tailwind/react";
@@ -33,14 +33,11 @@ const NewNav = (props) => {
 
   const submitHandler = async () => {
     const { username } = data;
-    let response = await fetch('https://study-sphere-backend.onrender.com/instructor/update', {
-      method: 'post',
+    let response = await baseUrl.post('/instructor/update', JSON.stringify({ username }), {
       headers: {
         'Content-Type': 'application/json',
-        body: JSON.stringify({ username }),
       }
     });
-    let d = await response.json();
   }
 
   return (

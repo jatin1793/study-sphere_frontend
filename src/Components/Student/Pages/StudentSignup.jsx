@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import axios from 'axios';
+import baseUrl from '../../../utils/baseUrl.js';
 import '../../../index.css'
 
 import logo from '../../../images/logo.png'
@@ -30,12 +30,28 @@ const Studentsignin = () => {
   async function registerStudent(e) {
     e.preventDefault();
     const { phone, email, name, password, institution, qualification, course } = inputs;
+
     if (!phone || !email || !name || !password || !institution || !qualification || !course) {
       toast.error("Fill in all required fields !!! ")
     }
+    else if(phone.length > 10 || phone.length < 10 ){
+      toast.error("Phone number should be of 10 digits.")
+    }
+    else if (email.length > 30 || email.length < 10) {
+      toast.error("Email should in range of 10 to 30 characters. ")
+    }
+    else if(name.length > 15 || name.length < 6 ){
+      toast.error("Name should be in range of 6 to 15 chaacters. ")
+    }
+    else if(password.length > 15 || password.length < 6 ){
+      toast.error("Password should be in range of 6 to 15 chaacters. ")
+    }
+    else if(qualification.length > 25 || qualification.length < 6 ){
+      toast.error("Password should be in range of 6 to 25 chaacters. ")
+    }
     else {
       try {
-        const response = await axios.post('https://study-sphere-backend.onrender.com/student/register', {
+        const response = await baseUrl.post('/student/register', {
           phone, email, name, password, institution, qualification, course
         }).then((response) => {
           if (response.data.alreadyExists) {
@@ -66,24 +82,21 @@ const Studentsignin = () => {
     }
     else {
       try {
-        let response = await fetch('https://study-sphere-backend.onrender.com/student/login', {
-          method: 'post',
-          body: JSON.stringify({ email, password }),
+        let response = await baseUrl.post('/student/login', JSON.stringify({ email, password }), {
           headers: {
             'Content-Type': 'application/json',
           }
         });
-        response = await response.json();
-        if (response.student_token) {
-          localStorage.setItem('student_user', JSON.stringify(response.user));
-          localStorage.setItem('student_token', JSON.stringify(response.student_token))
+        if (response.data.student_token) {
+          localStorage.setItem('student_user', JSON.stringify(response.data.user));
+          localStorage.setItem('student_token', JSON.stringify(response.data.student_token))
           toast.success("Login successfully !!")
           navigate(`/student/home`)
         }
-        if (!response.StudentExists && !response.passCheck) {
+        if (!response.data.StudentExists && !response.data.passCheck) {
           toast.error("Student doesn't exists with this email !!")
         }
-        else if (response.StudentExists && !response.passCheck) {
+        else if (response.data.StudentExists && !response.data.passCheck) {
           toast.error("Incorrect password !!")
         }
       }

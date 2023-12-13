@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import Navbar from "../Navbar.jsx";
+import baseUrl from "../../../utils/baseUrl.js";
 import { Card, CardHeader, CardBody, Typography, Button, } from "@material-tailwind/react";
 import { Dialog, Select, CardFooter, Input, Checkbox, } from "@material-tailwind/react";
 import { DialogHeader, DialogBody, DialogFooter, } from "@material-tailwind/react";
@@ -20,8 +21,7 @@ const ProfilePage = () => {
   const [data, setdata] = useState([]);
   async function fetchData() {
     try {
-      let response = await fetch("https://study-sphere-backend.onrender.com/student/details", {
-        method: "post",
+      let response = await baseUrl.post("/student/details",{} , {
         headers: {
           "Content-type": "application/json",
           authorization: `bearer ${JSON.parse(
@@ -29,9 +29,7 @@ const ProfilePage = () => {
           )}`,
         },
       });
-      response = await response.json();
-      console.log(response);
-      setdata(response);
+      setdata(response.data);
     } catch (error) {
       console.log(error);
     }
@@ -60,23 +58,14 @@ const ProfilePage = () => {
     const formData = new FormData();
     formData.set("file", profileimage);
 
-    let response = await fetch("https://study-sphere-backend.onrender.com/student/profileimg", {
+    let response = await baseUrl.post("/student/profileimg", formData, {
       headers: {
         authorization: `bearer ${JSON.parse(
           localStorage.getItem("student_token")
         )}`,
       },
-      method: "POST",
-      body: formData,
     });
-
-    let d = await response.json();
-    setnewprofileimg(d);
-    if (d) {
-      console.log("aa gyi")
-    } else {
-
-    }
+    setnewprofileimg(response.data);
     fetchData();
     toast.success(
       "Profile image uploaded successfully. Please refresh the page ."

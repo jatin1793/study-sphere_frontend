@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import NewNav from '../NewNav.jsx'
 
 import toast from 'react-hot-toast'
-
+import baseUrl from "../../../utils/baseUrl.js";
 import { ArrowUpTrayIcon } from "@heroicons/react/24/solid";
 
 import { Card, Input, Button, Textarea, Typography, } from "@material-tailwind/react";
@@ -29,15 +29,11 @@ function UploadForm() {
     formData.set('videodescription', videodescription)
     formData.set('videotitle', videotitle)
 
-    let response = await fetch(`https://study-sphere-backend.onrender.com/instructor/uploadvideo/${courseid}`, {
+    let response = await baseUrl.post(`/instructor/uploadvideo/${courseid}`, formData,  {
       headers: {
         authorization: `bearer ${JSON.parse(localStorage.getItem('instructor_token'))}`
       },
-      method: "post",
-      body: formData
     });
-    let d = await response.json();
-    console.log(d);
     toast.success(`"${file.name}" uploaded successfully to the course id:  "${courseid}"`);
     navigate('/instructor/home')
   }

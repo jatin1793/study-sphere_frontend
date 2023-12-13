@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import "../../index.css"
-
+import baseUrl from "../../utils/baseUrl.js"
 import logo from '../../images/logo.png'
 
 import { Dialog } from "@material-tailwind/react";
@@ -38,8 +38,7 @@ const Navbars = (props) => {
 
   async function fetchData() {
     try {
-      let response = await fetch("https://study-sphere-backend.onrender.com/student/details", {
-        method: "post",
+      let response = await baseUrl.post("/student/details", {}, {
         headers: {
           "Content-type": "application/json",
           authorization: `bearer ${JSON.parse(
@@ -47,8 +46,7 @@ const Navbars = (props) => {
           )}`,
         },
       });
-      response = await response.json();
-      setdata(response);
+      setdata(response.data);
     } catch (error) {
       console.log(error);
     }

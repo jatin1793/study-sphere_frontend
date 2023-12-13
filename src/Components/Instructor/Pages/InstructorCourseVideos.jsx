@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom';
 import '../../../index.css'
-
+import baseUrl from '../../../utils/baseUrl.js';
 import toast from 'react-hot-toast'
 
 import Loader from '../../../Loader.jsx';
@@ -22,16 +22,13 @@ const CourseVideos = () => {
     const sendIDtoserver = async () => {
         let bodyContent = JSON.stringify({ "courseid": id, });
 
-        let response = await fetch(`https://study-sphere-backend.onrender.com/instructor/course/${id}`, {
+        let response = await baseUrl.post(`/instructor/course/${id}`, bodyContent, {
             headers: {
                 "Content-Type": "application/json",
                 authorization: `bearer ${JSON.parse(localStorage.getItem('instructor_token'))}`
             },
-            method: "post",
-            body: bodyContent
         });
-        let d = await response.json();
-        setcoursedata(d)
+        setcoursedata(response.data)
     }
 
     useEffect(() => {
