@@ -143,6 +143,6 @@ const CourseVideos = () => {
             </div >
         )
     )
-}
+};
 
 export default CourseVideos
