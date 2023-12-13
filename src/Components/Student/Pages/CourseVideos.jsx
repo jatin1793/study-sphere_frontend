@@ -13,11 +13,6 @@ import { Button } from "@material-tailwind/react";
 
 import PlayCircleIcon from '@mui/icons-material/PlayCircle';
 
-function loadScript(src) {
-    const script = document.createElement('script')
-    script.src = src
-    script.onload = document.body.appendChild(script);
-}
 
 const CourseVideos = () => {
 
@@ -50,9 +45,6 @@ const CourseVideos = () => {
         setcoursedata(response.data)
     }
 
-    
-    };
-
     const enrollhandler = async () => {
         let bodyContent = JSON.stringify({ "courseid": id, });
         try {
@@ -66,17 +58,14 @@ const CourseVideos = () => {
                 toast.error("Disenrolled successfully !!")
             }
             else {
-                initializeRazorpay();
                 toast.success("Enrolled successfully !!")
             }
-            setcheckenroll(e.isEnrolled);
+            setcheckenroll(response.data.isEnrolled);
         }
         catch (err) {
             console.log(err)
         }
     }
-
-    const [orderId, setOrderId] = useState(null);
 
     useEffect(() => {
         setisLoading(true);
@@ -85,8 +74,6 @@ const CourseVideos = () => {
         }, 1200);
         sendIDtoserver();
     }, [])
-
-
 
     return (
 
