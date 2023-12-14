@@ -4,6 +4,7 @@ import '../../../index.css'
 import baseUrl from '../../../utils/baseUrl.js';
 import toast from 'react-hot-toast'
 
+
 import Loader from '../../../Loader.jsx';
 import NewNav from '../NewNav.jsx'
 
@@ -30,6 +31,7 @@ const CourseVideos = () => {
         });
         setcoursedata(response.data)
     }
+
 
     useEffect(() => {
         setisLoading(true);
@@ -64,7 +66,12 @@ const CourseVideos = () => {
 
                         <div>
                             <img src={coursedata.coursePoster} className='w-[35vw] h-72' />
-                            <h3 className='py-4 mb-[4px] text-[3vh] font-bold'>Lectures</h3>
+                            <div className='flex justify-between mt-6'>
+                                <h3 className='py-4 mb-[4px] text-[3vh] font-bold'>Lectures</h3>
+                                <Link to={`/instructor/course/videoform/${coursedata._id}`}>
+                                    <Button color='blue' className='h-12'>Add New video</Button>
+                                </Link>
+                            </div>
                             <div className='mt-2'>
                                 {coursedata.courseVideos ? (
                                     coursedata.courseVideos.length === 0 ? (

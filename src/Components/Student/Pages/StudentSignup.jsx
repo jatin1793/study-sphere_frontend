@@ -43,7 +43,7 @@ const Studentsignin = () => {
     else if(name.length > 15 || name.length < 6 ){
       toast.error("Name should be in range of 6 to 15 chaacters. ")
     }
-    else if(password.length > 15 || password.length < 6 ){
+    else if(password.length > 15 || password.length < 3 ){
       toast.error("Password should be in range of 6 to 15 chaacters. ")
     }
     else if(qualification.length > 25 || qualification.length < 6 ){

@@ -18,6 +18,7 @@ function UploadForm() {
   const [videodescription, setvideodescription] = useState(null)
   const [videotitle, setvideotitle] = useState(null)
 
+
   const submithandler = async (e) => {
     e.preventDefault();
     if (!file) {
@@ -29,13 +30,13 @@ function UploadForm() {
     formData.set('videodescription', videodescription)
     formData.set('videotitle', videotitle)
 
-    let response = await baseUrl.post(`/instructor/uploadvideo/${courseid}`, formData,  {
+    let response = await baseUrl.post(`/instructor/uploadvideo/${courseid}`, formData, {
       headers: {
         authorization: `bearer ${JSON.parse(localStorage.getItem('instructor_token'))}`
       },
     });
     toast.success(`"${file.name}" uploaded successfully to the course id:  "${courseid}"`);
-    navigate('/instructor/home')
+    navigate(`/instructor/course/${courseid}`)
   }
 
   return (
@@ -57,6 +58,7 @@ function UploadForm() {
             </div>
             <Button type="submit" className="mt-6" >Upload</Button>
           </form>
+
         </Card>
       </div>
 
