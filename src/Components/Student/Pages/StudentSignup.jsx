@@ -40,15 +40,13 @@ const Studentsignin = () => {
     else if (email.length > 30 || email.length < 10) {
       toast.error("Email should in range of 10 to 30 characters. ")
     }
-    else if(name.length > 15 || name.length < 6 ){
-      toast.error("Name should be in range of 6 to 15 chaacters. ")
+    else if(name.length > 15 || name.length < 3 ){
+      toast.error("Name should be in range of 3 to 15 chaacters. ")
     }
     else if(password.length > 15 || password.length < 3 ){
-      toast.error("Password should be in range of 6 to 15 chaacters. ")
+      toast.error("Password should be in range of 3 to 15 chaacters. ")
     }
-    else if(qualification.length > 25 || qualification.length < 6 ){
-      toast.error("Password should be in range of 6 to 25 chaacters. ")
-    }
+   
     else {
       try {
         const response = await baseUrl.post('/student/register', {
