@@ -44,7 +44,13 @@
     border-radius: 4px;
     animation: jump7456 0.5s linear infinite;
   }
-  
+  .kuhu{
+    overflow-y: scroll;
+    height: 89vh;
+  }
+  .coursecreate{
+    box-shadow: 0 0 15px -5px #444444;
+  }
   @keyframes jump7456 {
     15% {
       border-bottom-right-radius: 3px;

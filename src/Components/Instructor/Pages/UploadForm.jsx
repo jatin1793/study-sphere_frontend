@@ -43,22 +43,21 @@ function UploadForm() {
     <div>
       <NewNav />
 
-      <div className="px-20">
+      <div className="px-20 flex justify-center mt-8">
         <Card color="transparent" shadow={true} className="container w-fit p-4">
-          <Typography variant="h4" color="blue-gray">Upload Video Lessons</Typography>
-          <div className="container w-60 h-40 m-auto rounded-lg border">
-            <ArrowUpTrayIcon className="w-20 h-20 m-auto mt-8" />
+          <Typography variant="h4" className="text-center text-[#9179F5]" color="blue-gray">Upload Video Lessons</Typography>
+          <div className="container w-60 h-20 mt-4 m-auto rounded-lg border">
+            <ArrowUpTrayIcon className="w-16 h-16 text-[#9179F5] m-auto mt-2" />
           </div>
-          <Typography color="gray" className="mt-1 font-normal"> Add Video Details </Typography>
+          <Typography color="gray" className="mt-1 font-normal text-center"> Add Video Details </Typography>
           <form onSubmit={submithandler} encType="multipart/form-data" className="mt-3 mb-2 w-80 max-w-screen-lg sm:w-96">
             <div className="mb-4 flex flex-col gap-6">
               <input type="file" onChange={(e) => setFile(e.target.files[0])} />
-              <Input label="Title" onChange={(e) => setvideotitle(e.target.value)} />
-              <Textarea color="blue" onChange={(e) => setvideodescription(e.target.value)} label="Description" />
+              <Input label="Title" color="indigo" onChange={(e) => setvideotitle(e.target.value)} />
+              <Textarea color="indigo"  onChange={(e) => setvideodescription(e.target.value)} label="Description" />
             </div>
-            <Button type="submit" className="mt-6" >Upload</Button>
+            <Button type="submit" className="mt-6 w-full bg-[#9179F5]" >Upload</Button>
           </form>
-
         </Card>
       </div>
 
