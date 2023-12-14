@@ -55,8 +55,8 @@ const InstrunctorSignUp = () => {
               toast.error("Instructor with this email already exists !")
             } else {
               toast.success("Instructor registered successfully !! ")
-              localStorage.setItem('instructor_user', JSON.stringify(response.user));
-              localStorage.setItem('instructor_token', JSON.stringify(response.instructor_token))
+              localStorage.setItem('instructor_user', JSON.stringify(response.data.user));
+              localStorage.setItem('instructor_token', JSON.stringify(response.data.instructor_token))
               navigate(`/instructor/home`)
             }
           })
