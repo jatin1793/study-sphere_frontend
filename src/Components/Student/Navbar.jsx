@@ -57,12 +57,12 @@ const Navbars = (props) => {
   }, []);
 
   return (
-    <div className='flex gap-2 bg-white'>
-      <div className='justify-center items-center w-full'>
+    <div className='flex gap-2 bg-white' style={{boxShadow: '0px 0px 15px -2px #444444'}}>
+      <div className='justify-center items-center w-full' >
         <div className="px-6 py-2 text-white w-screen">
           <div className="flex items-center justify-between text-black">
             <div className='flex gap-12 items-center'>
-              <MenuIcon onClick={openDrawer} className='cursor-pointer' />
+              <MenuIcon onClick={openDrawer} className='cursor-pointer text-[#ff723f]' />
               <img src={logo} className='w-24' />
               <div className="w-[40vw] flex border border-solid border-[black] rounded-[30px] py-2 px-4">
                 <input type="text" placeholder='Search' onChange={props.handler} className="w-full border-none outline-none" onFocus={props.searchhandler} />
@@ -108,8 +108,8 @@ const Navbars = (props) => {
                 <h3>{data.name}</h3>
               </Link>
 
-              <ListItem onClick={() => handlelogoutdialog("xs")} >
-                <ListItemPrefix><LogoutIcon className='text-black cursor-pointer' /></ListItemPrefix>Log Out
+              <ListItem onClick={() => handlelogoutdialog("xs")} className='text-[#ff723f]' >
+                <ListItemPrefix><LogoutIcon className=' cursor-pointer text-[#ff723f]' /></ListItemPrefix>Log Out
               </ListItem>
             </div>
 

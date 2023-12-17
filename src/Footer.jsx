@@ -10,7 +10,7 @@ import logo from '../src/images/logo.png'
 const Footer = () => {
   return (
     <div>
-      <div className="w-full h-[70vh] bg-[gray] p-8">
+      <div className="w-full h-[70vh] bg-[gray] p-8 footer">
         <div className="text-white">
           <img
             src={logo}

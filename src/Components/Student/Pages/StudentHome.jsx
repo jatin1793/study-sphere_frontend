@@ -102,9 +102,9 @@ const StudentHome = () => {
 
   return (
     isLoading ? (<Loader />) : (
-      <div className='box w-screen overflow-hidden'>
+      <div className='box w-screen'>
         <Navbar handler={inputHandler} searchhandler={scrollto} />
-        <div className='w-full h-96' >
+        <div className='w-full h-96'  >
           <Carousel
             prevArrow={({ handlePrev }) => (
               <IconButton variant="text" color="white" size="lg" onClick={handlePrev} className="!absolute top-2/4 left-4 -translate-y-2/4" >

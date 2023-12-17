@@ -19,6 +19,7 @@ const ProfilePage = () => {
   const handleOpenprofileimg = () => setOpenprofileimg(!openprofileimg);
 
   const [data, setdata] = useState([]);
+  const [data1,setData1]=useState([]);
   async function fetchData() {
     try {
       let response = await baseUrl.post("/student/details",{} , {
@@ -30,6 +31,7 @@ const ProfilePage = () => {
         },
       });
       setdata(response.data);
+      setData1(response.data);
     } catch (error) {
       console.log(error);
     }
@@ -71,8 +73,25 @@ const ProfilePage = () => {
       "Profile image uploaded successfully. Please refresh the page ."
     );
   };
+  const editProfileData =async (e)=>{
+    e.preventDefault();
+    
+      const {name,phone,qualification,institution,course}=data1;
+      console.log("update")
+    let response = await baseUrl.post('/student/updateprofile', JSON.stringify({ name ,phone,qualification,institution,course}), {
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: `bearer ${JSON.parse(localStorage.getItem('student_token'))}`,
 
-
+      }
+    });
+    let d = response.data;
+    if(d){
+      toast.success("Profile Updated!")
+    }
+    fetchData();
+  }
+  
   const changehandler = (e) => {
     if (e.target.files[0]) {
       if (e.target.files[0].type.startsWith('image/')) {
@@ -87,7 +106,10 @@ const ProfilePage = () => {
       }
     }
   };
-
+  const [edit,setEdit]=useState(true);
+  const makeEditable = ()=>{
+    setEdit(!edit);
+  }
   return isLoading ? (
     <Loader />
   ) : (
@@ -112,52 +134,25 @@ const ProfilePage = () => {
             {/* <button> */}
             <input type="file" className="bg-blue-100 hidden" name="image" ref={inputref} onChange={changehandler} />
             <input type="submit" className="hidden" ref={submitref} />
-            <Button className="bg-[#5553FF]" onClick={handleInputClick} >Choose photo</Button>
+            <Button className="bg-[#ff723f]" onClick={handleInputClick} >Choose photo</Button>
             {/* </button> */}
           </form>
-          <Button onClick={handleOpen} className="mt-2 bg-[#5553FF]" type="submit" >Edit Profile</Button>
-          <Dialog size="xs" open={open} handler={handleOpen} className="bg-transparent shadow-none" >
-            <Card className="mx-auto w-full">
-              <form className="p-4 flex flex-col gap-4">
-                <div className="flex flex-col gap-6">
-                  <Typography variant="small" color="blue-gray" className="mt-4 font-medium" > Edit Profile</Typography>
-                  <Input type="Number" label="Phone number" />
-                  <Input type="name" label="Name" />
-                  <Typography variant="small" color="blue-gray" className="mt-4 font-medium" >Education Details</Typography>
-                  <Input type="name" label="Institution name" />
-                  <Select label="Select Qualification">
-                    <Option value="Material Tailwind HTML"> Material Tailwind HTML </Option>
-                    <Option value="Material Tailwind React"> Material Tailwind React </Option>
-                    <Option value="Material Tailwind Vue"> Material Tailwind Vue </Option>
-                    <Option value="Material Tailwind Angular"> Material Tailwind Angular </Option>
-                    <Option value="Material Tailwind Svelte"> Material Tailwind Svelte </Option>
-                  </Select>
-                  <Select label="Select Course">
-                    <Option value="Material Tailwind HTML"> Material Tailwind HTML </Option>
-                    <Option value="Material Tailwind React"> Material Tailwind React </Option>
-                    <Option value="Material Tailwind Vue"> Material Tailwind Vue </Option>
-                    <Option value="Material Tailwind Angular"> Material Tailwind Angular </Option>
-                    <Option value="Material Tailwind Svelte"> Material Tailwind Svelte </Option>
-                  </Select>
-                </div>
-                <Button color="blue" size="sm" type="submit"> Save </Button>
-              </form>
-            </Card>
-          </Dialog>
+          <Button onClick={makeEditable} className="mt-2 bg-[#ff723f]" >Edit Profile</Button>
+          
         </div>
 
         {/* 2 */}
         <div className="px-12 flex flex-col">
           <h3 className="font-[Poppins] font-bold text-[4vh]">Basic Information</h3>
-          <form className="mt-4 flex flex-col  gap-2">
-            <input placeholder={data.name} type="text" className="w-96 bg-[#E8EDF4] px-12 py-2 pointer-events-none outline-none" />
-            <input placeholder={data.email} type="text" className="w-96 bg-[#E8EDF4] px-12 py-2 pointer-events-none outline-none" />
-            <input placeholder={data.phone} type="text" className="w-96 bg-[#E8EDF4] px-12 py-2 pointer-events-none outline-none" />
-            <input placeholder={data.qualification} type="text" className="w-96 bg-[#E8EDF4] px-12 py-2 pointer-events-none outline-none" />
-            <input placeholder={data.institution} type="text" className="w-96 bg-[#E8EDF4] px-12 py-2 pointer-events-none outline-none" />
-            <input placeholder={data.course} type="text" className="w-96 bg-[#E8EDF4] px-12 py-2 pointer-events-none outline-none" />
-
-            <Button type="submit"> Save </Button>
+          <form className="mt-4 flex flex-col  gap-2" onSubmit={editProfileData} >
+            <input defaultValue={data.name} disabled={edit} onChange={(e)=>{setData1({...data1,name:e.target.value})}}  type="text" className="w-96 bg-[#E8EDF4] px-12 py-2  outline-none" />
+            <input defaultValue={data.email}  type="text" className="w-96 bg-[#E8EDF4] px-12 py-2 pointer-events-none outline-none" />
+            <input defaultValue={data.phone} disabled={edit} onChange={(e)=>{setData1({...data1,phone:e.target.value})}} type="text" className="w-96 bg-[#E8EDF4] px-12 py-2  outline-none" />
+            <input defaultValue={data.qualification} disabled={edit} onChange={(e)=>{setData1({...data1,qualification:e.target.value})}} type="text" className="w-96 bg-[#E8EDF4] px-12 py-2  outline-none" />
+            <input defaultValue={data.institution} disabled={edit} onChange={(e)=>{setData1({...data1,institution:e.target.value})}} type="text" className="w-96 bg-[#E8EDF4] px-12 py-2  outline-none" />
+            <input defaultValue={data.course} disabled={edit} onChange={(e)=>{setData1({...data1,course:e.target.value})}} type="text" className="w-96 bg-[#E8EDF4] px-12 py-2  outline-none" />
+            
+            <Button type="submit" onClick={makeEditable}> Save </Button>
           </form>
         </div>
 
