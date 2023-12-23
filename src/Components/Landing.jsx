@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { Button, Avatar } from "@material-tailwind/react";
 import '../index.css'
 import landing from '../images/landing (1).png'
-import both from '../images/both2.png'
+import both from '../images/both2-removebg-preview.png'
 import instructor from '../images/instructor (1).png'
 import chat from '../images/chat.png'
 import logo from '../images/logo.png'
@@ -55,9 +55,9 @@ const Landing = () => {
                     </div>
                 </div>
                 <div className='h-[35rem] w-[28rem]  relative'>
-                    <div className=' h-[11rem] w-[11rem] rounded-lg bg-red-500 border border-[2.2rem] border-orange-500 relative  top-[1rem] left-[11rem]'><div className='bg-white absolute top-[5rem] left-[-6rem] w-[10rem] ' ><img src={chat} className='object-fill w-[6rem]' alt="" /></div><img className='h-[10rem] absolute top-[-3rem] object-cover  left-[-1rem]  bg-black' src={both} alt="" /></div>
-                    <div className=' h-[9rem] w-[9rem] rounded-lg bg-[#3AAFFF] outline outline-offset-4 outline-[#3AAFFF] outline-2 relative  top-[3rem] left-[2rem]'><div className='bg-white absolute top-[5rem] left-[-6rem] w-[10rem] ' ><img src={chat} className='object-fill w-[6rem]' alt="" /></div><img className='h-[10rem] absolute top-[-3rem] left-[-1rem] object-cover' src={instructor} alt="" /></div>
-                    <div className=' h-[8rem] relative w-[8rem] rounded-lg bg-gray-700 outline outline-offset-4 outline-gray-700 outline-2 relative  top-[3rem] left-[15rem]'><div className='bg-white absolute top-[5rem] left-[-6rem] w-[10rem] ' ><img src={chat} className='object-fill w-[6rem]' alt="" /></div><img className='h-[10rem] absolute top-[-3rem] left-[-1rem] object-cover' src={landing} alt="" /></div>
+                    <div className=' h-[11rem] w-[11rem] rounded-lg bg-red-500 border border-[2.2rem] border-orange-500 relative top-[1rem] left-[11rem]'><div className='bg-white absolute top-[5rem] left-[-6rem] w-[10rem] ' ></div></div><img className=' h-[12rem]  absolute top-[0.3rem]   left-[6.6rem]  ' src={both} alt="" />
+                    <div className=' h-[9rem] w-[9rem] rounded-lg bg-[#3AAFFF] outline outline-offset-4 outline-[#3AAFFF] outline-2 relative  top-[3rem] left-[2rem]'><div className='bg-white absolute top-[5rem] left-[-6rem] w-[10rem] ' ></div><img className='h-[12rem] absolute top-[-3rem] left-[0rem] object-cover' src={instructor} alt="" /></div>
+                    <div className=' h-[8rem] relative w-[8rem] rounded-lg bg-gray-700 outline outline-offset-4 outline-gray-700 outline-2 relative  top-[3rem] left-[15rem]'><div className='bg-white absolute top-[5rem] left-[-6rem] w-[10rem] ' ></div><img className='h-[12rem] absolute top-[-4rem] left-[0rem] object-cover' src={landing} alt="" /></div>
 
                 </div>
             </div>

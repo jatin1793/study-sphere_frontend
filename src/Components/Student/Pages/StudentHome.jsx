@@ -102,8 +102,9 @@ const StudentHome = () => {
 
   return (
     isLoading ? (<Loader />) : (
-      <div className='box w-screen'>
+      <div className='box w-screen overflow-hidden'>
         <Navbar handler={inputHandler} searchhandler={scrollto} />
+        <div className='kuhu'>
         <div className='w-full h-96'  >
           <Carousel
             prevArrow={({ handlePrev }) => (
@@ -146,7 +147,7 @@ const StudentHome = () => {
           </Carousel>
         </div>
 
-        <div className='h-full py-12 px-12 flex flex-col gap-6'>
+        <div className=' py-12 px-12 flex flex-col gap-6'>
           {/* All Courses */}
           <div className='w-[90vw]' ref={ref}>
             <h3 className='font-[Poppins] text-[6vh] items-center mb-6 mr-6 flex'>Explore Best-In-Class Content</h3>
@@ -258,7 +259,7 @@ const StudentHome = () => {
         </div>
 
         <Footer />
-
+        </div>   
       </div>)
 
   )

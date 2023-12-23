@@ -64,9 +64,9 @@ const Navbars = (props) => {
             <div className='flex gap-12 items-center'>
               <MenuIcon onClick={openDrawer} className='cursor-pointer text-[#ff723f]' />
               <img src={logo} className='w-24' />
-              <div className="w-[40vw] flex border border-solid border-[black] rounded-[30px] py-2 px-4">
+              <div className="w-[40vw] searchbar flex border border-solid border-[#ff723f] rounded-[30px] ml-32 py-2 px-4">
                 <input type="text" placeholder='Search' onChange={props.handler} className="w-full border-none outline-none" onFocus={props.searchhandler} />
-                <SearchIcon />
+                <SearchIcon className='text-[#ff723f]' />
               </div>
             </div>
             <Link to="/student/profile" className='flex gap-2 items-center'>

@@ -80,7 +80,7 @@ const CourseVideos = () => {
         isLoading ? (<Loader />) : (
             <div>
                 <Navbar />
-                <div className='py-12 px-24'>
+                <div className='kuhu py-12 px-24'>
 
                     <div className='flex gap-36'>
                         <div>
