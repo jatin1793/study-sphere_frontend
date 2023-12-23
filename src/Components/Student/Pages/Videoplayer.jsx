@@ -146,7 +146,7 @@ const Videoplayer = () => {
                                 return (
                                     <a href={`/student/course/${item.videoCourse}/video/${item._id}`} key={item._id} >
                                         <div className='px-2 mt-4 bg-[#E8EDF4] flex  items-center'>
-                                            <div className='w-36 bg-white p-2'>
+                                            <div className='w-36 py-2'>
                                                 <video className="" src={item.videoUrl}></video>
                                             </div>
                                             <div className='flex gap-6 mr-2 py-2 px-4'>
