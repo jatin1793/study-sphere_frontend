@@ -78,9 +78,9 @@ const CourseVideos = () => {
     return (
 
         isLoading ? (<Loader />) : (
-            <div>
+            <div className='w-full overflow-hidden'>
                 <Navbar />
-                <div className='kuhu py-12 px-24'>
+                <div className='kuhu no-scrollbar py-12 px-24'>
 
                     <div className='flex gap-36'>
                         <div>

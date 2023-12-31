@@ -18,10 +18,10 @@ const CourseCard = (props) => {
             />
           </div>
           <div className='w-full py-2'>
-            <h3 className="uppercase font-bold text-[3vh] font-[gilroy] mb-4 text-[black] font-medium">
+            <h3 className="uppercase h-12 font-bold text-[3vh] font-[gilroy] mb-4 text-[black] font-medium">
               {props.coursename}
             </h3>
-            <h3 className="text-[2vh] font-[gilroy] mb-2 text-[gray] font-medium">
+            <h3 className="text-[2.5vh] font-[gilroy] mb-2 text-[gray]">
               {props.instructor}
             </h3>
             <h3 className="text-[2vh] font-[gilroy] mb-4 text-[black] font-medium">

@@ -35,13 +35,13 @@ const SavedCourse = () => {
 
   return (
     isLoading ? (<Loader />) : (
-      <div>
+      <div className='w-full overflow-hidden'>
         <Navbar />
         <div>
           
           <div className='w-[90vw] px-12 py-12'>
-            <h3 className='font-[Poppins] text-[6vh] items-center mb-6 mr-6 flex'>Enrolled courses</h3>
-            <div className='flex w-[95vw] gap-6 overflow-x-auto'>
+            <h3 className='font-[Poppins] text-[6vh] ml-4'>Enrolled courses</h3>
+            <div className='flex flex-wrap w-[95vw] gap-2 mt-2'>
               {data.map((item) => {
                 return (
                   <CourseCard

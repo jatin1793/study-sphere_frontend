@@ -7,7 +7,7 @@ import baseUrl from '../../../utils/baseUrl.js';
 
 const SavedCourse = () => {
   const [isLoading, setisLoading] = useState(false)
-  const [data, setdata] = useState([])
+  const [likedvideos, setlikedvideos] = useState([])
 
   async function fetchData() {
     try {
@@ -19,7 +19,7 @@ const SavedCourse = () => {
           )}`,
         },
       });
-      setdata(response.data.joinedcourses);
+      setlikedvideos(response.data.likedvideos);
     } catch (error) {
       console.log(error);
     }
@@ -40,9 +40,15 @@ const SavedCourse = () => {
         <div>
 
           <div className='w-[90vw] px-12 py-12'>
-            <h3 className='font-[Poppins] text-[6vh] items-center mb-6 mr-6 flex'>Enrolled courses</h3>
+            <h3 className='font-[Poppins] text-[6vh] items-center mb-6 mr-6 flex'>Liked videos</h3>
             <div className='flex w-[95vw] gap-6 overflow-x-auto'>
-              <VideoCard />
+              {likedvideos.reverse().map((item) => {
+                return (
+                  <VideoCard
+                    courseid={item._id}
+                  />
+                );
+              })}
             </div>
 
           </div>

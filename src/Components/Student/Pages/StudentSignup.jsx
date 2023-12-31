@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import baseUrl from '../../../utils/baseUrl.js';
 import '../../../index.css'
 
@@ -116,8 +116,9 @@ const Studentsignin = () => {
 
       <div className='w-screen h-screen'>
 
-        <nav className='absolute px-12 py-4 w-full'>
+        <nav className='absolute px-12 py-4 w-full flex justify-between '>
           <img className="h-12" src={logo} />
+          <Link to={'/'}><Button variant="outlined" className="rounded-full" color="deep-orange">Back</Button></Link>
         </nav>
 
         <div className='w-screen h-screen flex'>

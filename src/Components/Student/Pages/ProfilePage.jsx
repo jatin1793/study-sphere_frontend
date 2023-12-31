@@ -108,12 +108,13 @@ const ProfilePage = () => {
   };
   const [edit,setEdit]=useState(true);
   const makeEditable = ()=>{
+    toast.success('Edit the field you want directly.')
     setEdit(!edit);
   }
   return isLoading ? (
     <Loader />
   ) : (
-    <div className="w-screen flex flex-col">
+    <div className="w-full overflow-hidden flex flex-col">
       <Navbar />
       <div className="absolute flex gap-6 mt-[90px] ml-24">
         {/* 1 */}

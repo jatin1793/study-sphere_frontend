@@ -83,9 +83,9 @@ const Videoplayer = () => {
     return (
         isLoading ? (<Loader />) : (
 
-            <div>
+            <div className='w-full overflow-hidden'>
                 <Navbar />
-                <div className='px-8 py-6 flex kuhu'>
+                <div className='px-8 py-6 flex kuhu no-scrollbar'>
 
                     <div className='w-[60vw] h-[60vh]'>
                         <MediaPlayer

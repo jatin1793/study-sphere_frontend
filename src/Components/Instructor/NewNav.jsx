@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import '../../index.css'
 import baseUrl from '../../utils/baseUrl';
@@ -24,6 +24,8 @@ const NewNav = (props) => {
 
   const [data, setData] = useState({ username: "", about: "", email: "", phone: "", qualification: "", experiance: "" })
   const [data1, setData1] = useState([]);
+  const [profileimage, setprofileimage] = useState("");
+
   const [openRight, setOpenRight] = useState(false);
   const openDrawerRight = () => setOpenRight(true);
   const closeDrawerRight = () => setOpenRight(false);
@@ -31,11 +33,55 @@ const NewNav = (props) => {
   const [open, setOpen] = useState(false);
   const handlelogoutdialog = () => setOpen(!open);
 
+  // Log out handler
   const logouthandler = () => {
     localStorage.removeItem('student_user');
     localStorage.removeItem('student_token');
     navigate('/instructor/signup-signin')
   }
+
+  // input of profile img
+  const inputref = useRef(null);
+  const handleInputClick = () => {
+    inputref.current.click();
+  };
+  const submitref = useRef(null);
+
+  // Check if profile img is in correct extension or not.
+  const changehandler = (e) => {
+    if (e.target.files[0]) {
+      if (e.target.files[0].type.startsWith('image/')) {
+        setprofileimage(e.target.files[0]);
+        setTimeout(() => {
+          submitref.current.click();
+        }, 1000);
+      }
+      else {
+        toast.error('Please select a image.');
+        e.target.value = null;
+      }
+    }
+  };
+
+  const sendimagetoserver = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.set("file", profileimage);
+
+    let response = await baseUrl.post("/instructor/profileimg", formData, {
+      headers: {
+        authorization: `bearer ${JSON.parse(
+          localStorage.getItem("instructor_token")
+        )}`
+      }
+    });
+    setprofileimage(response.data.profileimg);
+    toast.success(
+      "Profile image uploaded successfully. Please refresh the page ."
+    );
+  };
+
+  // Fetch data of all courses
   async function fetchData() {
     let d = await baseUrl.get('/instructor/mycourses', {
       headers: {
@@ -45,17 +91,16 @@ const NewNav = (props) => {
     let response = d.data;
     setData1(response)
     setData({ username: response.name, phone: response.phone, qualification: response.qualification, experiance: response.experience })
-
   }
+
+  // Instructor update handler
   const submitHandler = async (e) => {
     e.preventDefault();
-
     const { username, phone, qualification, experiance } = data;
     let response = await baseUrl.post('/instructor/update', JSON.stringify({ username, phone, qualification, experiance }), {
       headers: {
         'Content-Type': 'application/json',
         authorization: `bearer ${JSON.parse(localStorage.getItem('instructor_token'))}`,
-
       }
     });
     let d = response.data;
@@ -63,12 +108,12 @@ const NewNav = (props) => {
       toast.success("Profile Updated!")
     }
     fetchData();
-
   }
+
   useEffect(() => {
     fetchData();
   }, []);
-  console.log(data)
+
   return (
     <div className='flex gap-2 '>
       <div className='justify-center items-center w-full bg-white z-[9999999]' style={{ boxShadow: '0px 0px 15px -2px #444444' }}>
@@ -83,7 +128,7 @@ const NewNav = (props) => {
               <Menu>
                 <MenuHandler>
                   <button className='cursor-pointer'>
-                    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_RlT-ytB9A_TQFLKMqVYpdJiiRbckTCThmw&usqp=CAU' className='h-14 w-14 border border-2 border-[#9179F5] rounded-full mr-6' />
+                    <img src={profileimage} className='h-14 w-14 border border-2 border-[#9179F5] rounded-full mr-6' />
                   </button>
                 </MenuHandler>
 
@@ -129,14 +174,14 @@ const NewNav = (props) => {
                     <h3 className="mb-2 font-bold text-[3vh] font-[Poppins] tracking-[.5px]">Personal Details</h3>
                     <div>
                       <img
-                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_RlT-ytB9A_TQFLKMqVYpdJiiRbckTCThmw&usqp=CAU"
+                        src={profileimage}
                         className="h-36 w-36 object-cover rounded-full"
                       />
                     </div>
-                    <form>
-                      <input type="file" className="bg-blue-100 hidden" name="image" />
-                      <input type="submit" className="hidden" />
-                      <Button className="bg-[#9179F5] mt-4" >Choose photo</Button>
+                    <form onSubmit={sendimagetoserver}>
+                      <input type="file" className="bg-blue-100 hidden" name="image" ref={inputref} onChange={changehandler} />
+                      <input type="submit" className="hidden" ref={submitref} />
+                      <Button className="bg-[#9179F5] mt-4" onClick={handleInputClick} >Choose photo</Button>
                     </form>
 
                   </div>

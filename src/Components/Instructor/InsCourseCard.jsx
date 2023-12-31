@@ -7,7 +7,6 @@ import { Tooltip } from "@material-tailwind/react";
 import { Card, CardHeader, CardBody, CardFooter, Typography, Button, } from "@material-tailwind/react";
 
 const CourseCard = (props) => {
-  console.log(props)
   return (
     <div>
       <div className="shrink-0 rounded-none h-max p-4 w-72">

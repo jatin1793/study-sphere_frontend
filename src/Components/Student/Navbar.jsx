@@ -98,7 +98,7 @@ const Navbars = (props) => {
               </Link>
 
               <Link to='/student/savedcourses'>
-                <ListItem><ListItemPrefix><TurnedInIcon className='text-black cursor-pointer' /></ListItemPrefix>Saved Courses </ListItem>
+                <ListItem><ListItemPrefix><TurnedInIcon className='text-black cursor-pointer' /></ListItemPrefix>Enrolled Courses </ListItem>
               </Link>
             </div>
 
