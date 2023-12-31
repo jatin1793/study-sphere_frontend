@@ -40,7 +40,7 @@ function UploadForm() {
   }
 
   return (
-    <div>
+    <div className='h-full w-full overflow-hidden'>
       <NewNav />
 
       <div className="px-20 flex justify-center mt-8">

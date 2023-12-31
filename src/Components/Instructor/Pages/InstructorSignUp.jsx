@@ -110,7 +110,7 @@ const InstrunctorSignUp = () => {
   return (
     isLoading ? (<Loader />) : (
 
-      <div className='w-screen h-screen'>
+      <div className='w-full h-full overflow-hidden'>
 
         <nav className='absolute px-12 py-4 w-full'>
           <img className="h-12" src={logo} />

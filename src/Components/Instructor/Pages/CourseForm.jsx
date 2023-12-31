@@ -41,9 +41,9 @@ const CourseForm = () => {
 
 
   return (
-    <div className='h-[100vh]'>
+    <div className='w-full overflow-hidden'>
       <NewNav />
-      <div className='px-12 h-[89vh] overflow-y-scroll  justify-center z-[99] flex py-4'>
+      <div className='px-12 justify-center z-[99] flex py-4'>
         <div color="transparent" shadow={true} className="container coursecreate  w-fit p-4">
           <Typography variant="h4" className='text-center text-[#9179F5]' color="blue-gray"> Create your Course </Typography>
           <Typography variant='h6' className='mt-2 text-center text-gray-700'>Select course poster</Typography>

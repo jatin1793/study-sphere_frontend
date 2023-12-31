@@ -44,7 +44,7 @@ const CourseVideos = () => {
     return (
 
         isLoading ? (<Loader />) : (
-            <div>
+            <div className='h-full w-full overflow-hidden'>
                 <NewNav />
                 <div className='py-12 px-24'>
 

@@ -8,7 +8,7 @@ import CoursesList from '../CoursesList.jsx'
 const InstructorHome = () => {
 
   return (
-    <div>
+    <div className='overflow-hidden'>
       <NewNav />
       <CoursesList />
     </div>
