@@ -24,7 +24,7 @@ const SavedCourse = () => {
       console.log(error);
     }
   }
-
+  console.log(likedvideos)
   useEffect(() => {
     setisLoading(true);
     setTimeout(() => {
@@ -41,11 +41,17 @@ const SavedCourse = () => {
 
           <div className='w-[90vw] px-12 py-12'>
             <h3 className='font-[Poppins] text-[6vh] items-center mb-6 mr-6 flex'>Liked videos</h3>
-            <div className='flex w-[95vw] gap-6 overflow-x-auto'>
+            <div className='flex w-[95vw] gap-6 flex-wrap'>
               {likedvideos.reverse().map((item) => {
                 return (
                   <VideoCard
-                    courseid={item._id}
+                    courseid={item.videoCourse._id}
+                    coursename={item.videoCourse.courseTitle}
+                    videoid={item._id}
+                    videotitle={item.videotitle}
+                    video={item.videoUrl}
+                    likes={item.videoLikes.length}
+                    instructor={item.instructor.name}
                   />
                 );
               })}
