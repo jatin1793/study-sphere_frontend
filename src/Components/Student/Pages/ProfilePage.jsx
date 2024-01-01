@@ -56,6 +56,7 @@ const ProfilePage = () => {
   const [profileimage, setprofileimage] = useState("");
   const [newprofileimg, setnewprofileimg] = useState("");
   const sendimagetoserver = async (e) => {
+    setisLoading(true);
     e.preventDefault();
     const formData = new FormData();
     formData.set("file", profileimage);
@@ -72,6 +73,7 @@ const ProfilePage = () => {
     toast.success(
       "Profile image uploaded successfully. Please refresh the page ."
     );
+    setisLoading(false);
   };
   const editProfileData =async (e)=>{
     e.preventDefault();

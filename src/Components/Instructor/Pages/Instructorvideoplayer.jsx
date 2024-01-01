@@ -21,6 +21,7 @@ const Instructorvideoplayer = () => {
     const [videodetails, setvideodetails] = useState({})
 
     const sendIDtoserver = async () => {
+        setisLoading(true)
         let bodyContent = JSON.stringify({ "videoid": videoid, });
 
         let response = await baseUrl.post(`/instructor/video/${videoid}`, bodyContent, {
@@ -30,13 +31,10 @@ const Instructorvideoplayer = () => {
             },
         });
         setvideodetails(response.data);
+        setisLoading(false)
     }
 
     useEffect(() => {
-        setisLoading(true);
-        setTimeout(() => {
-            setisLoading(false);
-        }, 500);
         sendIDtoserver();
     }, []);
 

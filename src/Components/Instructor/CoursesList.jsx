@@ -6,20 +6,25 @@ import baseUrl from '../../utils/baseUrl.js'
 import { Button } from '@material-tailwind/react'
 
 import InsCourseCard from "./InsCourseCard.jsx"
+import Loader from '../../Loader.jsx'
 
 const CoursesList = () => {
 
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+
+    const [isLoading, setisLoading] = useState(false)
 
     const [data, setdata] = useState([]);
 
     async function fetchData() {
+        setisLoading(true);
         let response = await baseUrl.get("/instructor/mycourses", {
             headers: {
                 authorization: `bearer ${JSON.parse(localStorage.getItem('instructor_token'))}`
             }
         });
-        setdata(response.data.coursescreated)
+        setdata(response.data.coursescreated);
+        setisLoading(false);
     }
 
     useEffect(() => {
@@ -27,6 +32,8 @@ const CoursesList = () => {
     }, []);
 
     return (
+    isLoading ? (<Loader />) : (
+
         <div className='kuhu no-scrollbar'>
             <div className='banner w-full flex  px-24 py-10  bg-cover' style={{ backgroundImage: 'url(https://edtechmagazine.com/higher/sites/edtechmagazine.com.higher/files/styles/cdw_hero/public/articles/%5Bcdw_tech_site%3Afield_site_shortname%5D/202305/GettyImages-597959356.jpg?itok=D69yLV2x)' }}>
                 <div className='text px-8 py-6 w-[35vw]  bg-white'>
@@ -72,6 +79,7 @@ const CoursesList = () => {
 
             </div>
         </div>
+    )
     )
 }
 

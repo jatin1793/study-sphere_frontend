@@ -35,7 +35,7 @@ const SavedCourse = () => {
 
   return (
     isLoading ? (<Loader />) : (
-      <div>
+      <div className='w-full overflow-hidden'>
         <Navbar />
         <div>
 

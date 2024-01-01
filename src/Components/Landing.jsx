@@ -22,7 +22,7 @@ const Landing = () => {
                 <div className='h-[35rem] w-[38rem]   pl-20 flex flex-col gap-6 justify-center'>
                     <div className='flex items-center mt-[-2rem]'><div className='h-[1rem] w-[1rem]  rounded-full bg-[#FF7A03]'></div><p className='m-4 text-[#FF7A03]'>New platform</p></div>
                     <h6 className='text-5xl font-bold leading-snug'>Take your time <br /> and learn from <br /> anywhere</h6>
-                    <Button variant="text" color='deep-orange' className="flex w-max items-center gap-2">
+                    <Button color='deep-orange' className="flex w-max items-center gap-2">
                         Get Started{" "}
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="h-5 w-5" >
                             <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />

@@ -13,7 +13,7 @@ const CourseCard = (props) => {
           <h3 className='text-lg uppercase font-[Poppins] leading-[4vh] h-6'>{props.videotitle}</h3>
           <h3 className='mt-2 font-extralight text-sm'>{props.coursename}</h3>
           <h3 className='mt-2 text-sm capitalize'>{props.instructor}</h3>
-          <h6 className='mt-4 text-sm capitalize'>{props.likes}Likes</h6>
+          <h6 className='mt-2 text-sm'>{props.likes} likes</h6>
         </div>
       </div>
     </Link>

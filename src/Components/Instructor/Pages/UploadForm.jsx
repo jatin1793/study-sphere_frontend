@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 import NewNav from '../NewNav.jsx'
+import Loader from "../../../Loader.jsx";
 
 import toast from 'react-hot-toast'
 import baseUrl from "../../../utils/baseUrl.js";
@@ -14,17 +15,18 @@ function UploadForm() {
   const { courseid } = useParams();
   const navigate = useNavigate();
 
+  const [isLoading, setisLoading] = useState(false)
   const [file, setFile] = useState(null);
   const [videodescription, setvideodescription] = useState(null)
   const [videotitle, setvideotitle] = useState(null)
 
 
   const submithandler = async (e) => {
+    setisLoading(true);
     e.preventDefault();
     if (!file) {
       toast.error('Please select a file.');
     }
-
     const formData = new FormData();
     formData.set('file', file);
     formData.set('videodescription', videodescription)
@@ -35,11 +37,17 @@ function UploadForm() {
         authorization: `bearer ${JSON.parse(localStorage.getItem('instructor_token'))}`
       },
     });
+    setisLoading(false);
     toast.success(`"${file.name}" uploaded successfully to the course id:  "${courseid}"`);
     navigate(`/instructor/course/${courseid}`)
   }
 
+  
+
+
   return (
+    isLoading ? (<Loader />) : (
+
     <div className='h-full w-full overflow-hidden'>
       <NewNav />
 
@@ -62,6 +70,7 @@ function UploadForm() {
       </div>
 
     </div>
+    )
   );
 }
 

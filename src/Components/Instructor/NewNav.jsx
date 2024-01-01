@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import '../../index.css'
 import baseUrl from '../../utils/baseUrl';
+import Loader from '../../Loader';
 import logo from '../../images/logo.png'
 import toast from 'react-hot-toast'
 import { Dialog, CardHeader, CardBody, CardFooter, Checkbox, } from "@material-tailwind/react";
@@ -22,6 +23,7 @@ const NewNav = (props) => {
 
   const navigate = useNavigate();
 
+  const [isLoading, setisLoading] = useState(false)
   const [data, setData] = useState({ username: "", about: "", email: "", phone: "", qualification: "", experiance: "" })
   const [data1, setData1] = useState([]);
   const [profileimage, setprofileimage] = useState("");
@@ -64,6 +66,7 @@ const NewNav = (props) => {
   };
 
   const sendimagetoserver = async (e) => {
+    setisLoading(true);
     e.preventDefault();
     const formData = new FormData();
     formData.set("file", profileimage);
@@ -76,6 +79,7 @@ const NewNav = (props) => {
       }
     });
     setprofileimage(response.data.profileimg);
+    setisLoading(false);
     toast.success(
       "Profile image uploaded successfully. Please refresh the page ."
     );
@@ -83,6 +87,7 @@ const NewNav = (props) => {
 
   // Fetch data of all courses
   async function fetchData() {
+    setisLoading(true);
     let d = await baseUrl.get('/instructor/mycourses', {
       headers: {
         authorization: `bearer ${JSON.parse(localStorage.getItem('instructor_token'))}`
@@ -91,10 +96,12 @@ const NewNav = (props) => {
     let response = d.data;
     setData1(response)
     setData({ username: response.name, phone: response.phone, qualification: response.qualification, experiance: response.experience })
+    setisLoading(false);
   }
 
   // Instructor update handler
   const submitHandler = async (e) => {
+    setisLoading(true);
     e.preventDefault();
     const { username, phone, qualification, experiance } = data;
     let response = await baseUrl.post('/instructor/update', JSON.stringify({ username, phone, qualification, experiance }), {
@@ -104,6 +111,7 @@ const NewNav = (props) => {
       }
     });
     let d = response.data;
+    setisLoading(false);
     if (d) {
       toast.success("Profile Updated!")
     }
@@ -115,6 +123,8 @@ const NewNav = (props) => {
   }, []);
 
   return (
+    isLoading ? (<Loader />) : (
+
     <div className='flex gap-2 '>
       <div className='justify-center items-center w-full bg-white z-[9999999]' style={{ boxShadow: '0px 0px 15px -2px #444444' }}>
         <div className="px-6 py-2 text-white w-screen ">
@@ -224,6 +234,7 @@ const NewNav = (props) => {
 
 
     </div>
+    )
   )
 }
 
