@@ -80,11 +80,12 @@ const NewNav = (props) => {
     });
     setprofileimage(response.data.profileimg);
     setisLoading(false);
+    // console.log(response.data)
     toast.success(
       "Profile image uploaded successfully. Please refresh the page ."
     );
   };
-
+  // console.log(profileimage)
   // Fetch data of all courses
   async function fetchData() {
     setisLoading(true);
@@ -96,6 +97,7 @@ const NewNav = (props) => {
     let response = d.data;
     setData1(response)
     setData({ username: response.name, phone: response.phone, qualification: response.qualification, experiance: response.experience })
+    setprofileimage(response.profileimg)
     setisLoading(false);
   }
 
