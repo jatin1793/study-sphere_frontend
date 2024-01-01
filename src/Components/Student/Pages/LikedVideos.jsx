@@ -19,17 +19,16 @@ const SavedCourse = () => {
           )}`,
         },
       });
-      setlikedvideos(response.data.likedvideos);
+      if (response.data) {
+        setlikedvideos(response.data.likedvideos);
+      }
     } catch (error) {
       console.log(error);
     }
   }
   console.log(likedvideos)
+
   useEffect(() => {
-    setisLoading(true);
-    setTimeout(() => {
-      setisLoading(false);
-    }, 500);
     fetchData();
   }, [])
 
@@ -46,8 +45,8 @@ const SavedCourse = () => {
                 return (
                   <VideoCard
                     courseid={item.videoCourse._id}
-                    coursename={item.videoCourse.courseTitle}
                     videoid={item._id}
+                    coursename={item.videoCourse.courseTitle}
                     videotitle={item.videotitle}
                     video={item.videoUrl}
                     likes={item.videoLikes.length}

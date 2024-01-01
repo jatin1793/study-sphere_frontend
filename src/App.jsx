@@ -3,7 +3,6 @@ import { Routes, Route } from 'react-router-dom'
 
 import Landing from './Components/Landing.jsx'
 import Notfound from './Components/Notfound.jsx';
-import Test from './Components/Test.jsx';
 
 import InstructorSignup from './Components/Instructor/Pages/InstructorSignUp.jsx'
 import InstructorHome from './Components/Instructor/Pages/InstructorHome.jsx'
@@ -34,7 +33,6 @@ const App = () => {
 
         <Route path="/" element={<Landing />} />
         <Route path="*" element={<Notfound />} />
-        <Route path="/test" element={<Test />} />
 
         <Route path="/instructor/signup-signin" element={<InstructorSignup />} />
         <Route path="/instructor/home" element={<Ins_Protected Component={InstructorHome} />} />

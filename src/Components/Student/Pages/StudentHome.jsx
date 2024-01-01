@@ -46,6 +46,7 @@ const StudentHome = () => {
 
   async function fetchData() {
     try {
+      setisLoading(true);
       let response = await baseUrl.post("/student/home", {}, {
         headers: {
           authorization: `bearer ${JSON.parse(localStorage.getItem('student_token'))}`
@@ -53,6 +54,7 @@ const StudentHome = () => {
       });
       setcourses(response.data.courses)
       setinstructors(response.data.instructors)
+      setisLoading(false);
     } catch (error) {
       console.log(error);
     }
@@ -60,10 +62,6 @@ const StudentHome = () => {
 
 
   useEffect(() => {
-    setisLoading(true);
-    setTimeout(() => {
-      setisLoading(false);
-    }, 500);
     fetchData();
   }, []);
 

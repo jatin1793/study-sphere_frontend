@@ -25,8 +25,9 @@ const CourseVideos = () => {
     const [checkenroll, setcheckenroll] = useState("")
 
     const sendIDtoserver = async () => {
+        setisLoading(true);
         let bodyContent = JSON.stringify({ "courseid": id, });
-
+        
         let status = await baseUrl.post(`/student/checkifenrolled/${id}`, bodyContent, {
             headers: {
                 "Content-Type": "application/json",
@@ -35,7 +36,7 @@ const CourseVideos = () => {
         });
         dispatch(setEnrollmentStatus(status.data.isEnrolled));
         setcheckenroll(status.data.isEnrolled);
-
+        
         let response = await baseUrl.post(`/student/course/${id}`, bodyContent, {
             headers: {
                 "Content-Type": "application/json",
@@ -43,9 +44,11 @@ const CourseVideos = () => {
             },
         });
         setcoursedata(response.data)
+        setisLoading(false);
     }
 
     const enrollhandler = async () => {
+        setisLoading(true);
         let bodyContent = JSON.stringify({ "courseid": id, });
         try {
             let response = await baseUrl.post(`/student/joincourse/${id}`, bodyContent, {
@@ -61,6 +64,7 @@ const CourseVideos = () => {
                 toast.success("Enrolled successfully !!")
             }
             setcheckenroll(response.data.isEnrolled);
+            setisLoading(false);
         }
         catch (err) {
             console.log(err)
@@ -68,10 +72,6 @@ const CourseVideos = () => {
     }
 
     useEffect(() => {
-        setisLoading(true);
-        setTimeout(() => {
-            setisLoading(false);
-        }, 1200);
         sendIDtoserver();
     }, [])
 

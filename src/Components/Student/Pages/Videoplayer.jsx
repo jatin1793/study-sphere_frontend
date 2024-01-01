@@ -31,6 +31,7 @@ const Videoplayer = () => {
 
 
     const sendIDtoserver = async () => {
+        setisLoading(true);
         let bodyContent = JSON.stringify({ "videoid": videoid, });
 
         let response = await baseUrl.post(`/student/video/${videoid}`, bodyContent, {
@@ -40,6 +41,7 @@ const Videoplayer = () => {
             },
         });
         setvideodetails(response.data);
+        setisLoading(false);
         dispatch(setlikedStatus(response.data.isliked));
     }
 
@@ -52,10 +54,10 @@ const Videoplayer = () => {
             },
         });
         setliked(response.data);
-        console.log(liked);
     }
 
     const like = async (e) => {
+        setisLoading(true);
         e.preventDefault();
         let bodyContent = { "videoid": videoid };
         let response = await baseUrl.post(`/student/video/like/${videoid}`, bodyContent, {
@@ -64,17 +66,14 @@ const Videoplayer = () => {
                 authorization: `bearer ${JSON.parse(localStorage.getItem('student_token'))}`
             },
         });
-        sendIDtoserver();
         checkifliked(videodetails._id);
+        setisLoading(false);
+        sendIDtoserver();
     }
 
 
 
     useEffect(() => {
-        setisLoading(true);
-        setTimeout(() => {
-            setisLoading(false);
-        }, 500);
         sendIDtoserver();
         checkifliked();
     }, []);

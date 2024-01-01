@@ -11,6 +11,7 @@ const SavedCourse = () => {
 
   async function fetchData() {
     try {
+      setisLoading(true);
       let response = await baseUrl.post("/student/details", {}, {
         headers: {
           "Content-type": "application/json",
@@ -20,16 +21,13 @@ const SavedCourse = () => {
         },
       });
       setdata(response.data.joinedcourses);
+      setisLoading(false);
     } catch (error) {
       console.log(error);
     }
   }
 
   useEffect(() => {
-    setisLoading(true);
-    setTimeout(() => {
-      setisLoading(false);
-    }, 500);
     fetchData();
   }, [])
 

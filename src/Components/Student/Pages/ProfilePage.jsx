@@ -19,10 +19,11 @@ const ProfilePage = () => {
   const handleOpenprofileimg = () => setOpenprofileimg(!openprofileimg);
 
   const [data, setdata] = useState([]);
-  const [data1,setData1]=useState([]);
+  const [data1, setData1] = useState([]);
   async function fetchData() {
     try {
-      let response = await baseUrl.post("/student/details",{} , {
+      setisLoading(true);
+      let response = await baseUrl.post("/student/details", {}, {
         headers: {
           "Content-type": "application/json",
           authorization: `bearer ${JSON.parse(
@@ -32,6 +33,7 @@ const ProfilePage = () => {
       });
       setdata(response.data);
       setData1(response.data);
+      setisLoading(false);
     } catch (error) {
       console.log(error);
     }
@@ -46,15 +48,12 @@ const ProfilePage = () => {
 
 
   useEffect(() => {
-    setisLoading(true);
-    setTimeout(() => {
-      setisLoading(false);
-    }, 1000);
     fetchData();
   }, []);
 
   const [profileimage, setprofileimage] = useState("");
   const [newprofileimg, setnewprofileimg] = useState("");
+
   const sendimagetoserver = async (e) => {
     setisLoading(true);
     e.preventDefault();
@@ -75,12 +74,12 @@ const ProfilePage = () => {
     );
     setisLoading(false);
   };
-  const editProfileData =async (e)=>{
+
+  const editProfileData = async (e) => {
+    setisLoading(true);
     e.preventDefault();
-    
-      const {name,phone,qualification,institution,course}=data1;
-      console.log("update")
-    let response = await baseUrl.post('/student/updateprofile', JSON.stringify({ name ,phone,qualification,institution,course}), {
+    const { name, phone, qualification, institution, course } = data1;
+    let response = await baseUrl.post('/student/updateprofile', JSON.stringify({ name, phone, qualification, institution, course }), {
       headers: {
         'Content-Type': 'application/json',
         authorization: `bearer ${JSON.parse(localStorage.getItem('student_token'))}`,
@@ -88,12 +87,13 @@ const ProfilePage = () => {
       }
     });
     let d = response.data;
-    if(d){
+    setisLoading(false);
+    if (d) {
       toast.success("Profile Updated!")
     }
     fetchData();
   }
-  
+
   const changehandler = (e) => {
     if (e.target.files[0]) {
       if (e.target.files[0].type.startsWith('image/')) {
@@ -108,8 +108,8 @@ const ProfilePage = () => {
       }
     }
   };
-  const [edit,setEdit]=useState(true);
-  const makeEditable = ()=>{
+  const [edit, setEdit] = useState(true);
+  const makeEditable = () => {
     toast.success('Edit the field you want directly.')
     setEdit(!edit);
   }
@@ -141,20 +141,20 @@ const ProfilePage = () => {
             {/* </button> */}
           </form>
           <Button onClick={makeEditable} className="mt-2 bg-[#ff723f]" >Edit Profile</Button>
-          
+
         </div>
 
         {/* 2 */}
         <div className="px-12 flex flex-col">
           <h3 className="font-[Poppins] font-bold text-[4vh]">Basic Information</h3>
           <form className="mt-4 flex flex-col  gap-2" onSubmit={editProfileData} >
-            <input defaultValue={data.name} disabled={edit} onChange={(e)=>{setData1({...data1,name:e.target.value})}}  type="text" className="w-96 bg-[#E8EDF4] px-12 py-2  outline-none" />
-            <input defaultValue={data.email}  type="text" className="w-96 bg-[#E8EDF4] px-12 py-2 pointer-events-none outline-none" />
-            <input defaultValue={data.phone} disabled={edit} onChange={(e)=>{setData1({...data1,phone:e.target.value})}} type="text" className="w-96 bg-[#E8EDF4] px-12 py-2  outline-none" />
-            <input defaultValue={data.qualification} disabled={edit} onChange={(e)=>{setData1({...data1,qualification:e.target.value})}} type="text" className="w-96 bg-[#E8EDF4] px-12 py-2  outline-none" />
-            <input defaultValue={data.institution} disabled={edit} onChange={(e)=>{setData1({...data1,institution:e.target.value})}} type="text" className="w-96 bg-[#E8EDF4] px-12 py-2  outline-none" />
-            <input defaultValue={data.course} disabled={edit} onChange={(e)=>{setData1({...data1,course:e.target.value})}} type="text" className="w-96 bg-[#E8EDF4] px-12 py-2  outline-none" />
-            
+            <input defaultValue={data.name} disabled={edit} onChange={(e) => { setData1({ ...data1, name: e.target.value }) }} type="text" className="w-96 bg-[#E8EDF4] px-12 py-2  outline-none" />
+            <input defaultValue={data.email} type="text" className="w-96 bg-[#E8EDF4] px-12 py-2 pointer-events-none outline-none" />
+            <input defaultValue={data.phone} disabled={edit} onChange={(e) => { setData1({ ...data1, phone: e.target.value }) }} type="text" className="w-96 bg-[#E8EDF4] px-12 py-2  outline-none" />
+            <input defaultValue={data.qualification} disabled={edit} onChange={(e) => { setData1({ ...data1, qualification: e.target.value }) }} type="text" className="w-96 bg-[#E8EDF4] px-12 py-2  outline-none" />
+            <input defaultValue={data.institution} disabled={edit} onChange={(e) => { setData1({ ...data1, institution: e.target.value }) }} type="text" className="w-96 bg-[#E8EDF4] px-12 py-2  outline-none" />
+            <input defaultValue={data.course} disabled={edit} onChange={(e) => { setData1({ ...data1, course: e.target.value }) }} type="text" className="w-96 bg-[#E8EDF4] px-12 py-2  outline-none" />
+
             <Button type="submit" onClick={makeEditable}> Save </Button>
           </form>
         </div>
