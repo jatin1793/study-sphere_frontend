@@ -9,9 +9,11 @@ import Loader from "../../../Loader.jsx";
 import Footer from "../../../Footer.jsx";
 import EditIcon from '@mui/icons-material/Edit';
 import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
+import FileLoader from '../../../FileLoader.jsx'
 
 const ProfilePage = () => {
   const [isLoading, setisLoading] = useState(false);
+  const [fileloading, setfileloading] = useState(false)
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen((cur) => !cur);
 
@@ -20,6 +22,7 @@ const ProfilePage = () => {
 
   const [data, setdata] = useState([]);
   const [data1, setData1] = useState([]);
+
   async function fetchData() {
     try {
       setisLoading(true);
@@ -52,10 +55,10 @@ const ProfilePage = () => {
   }, []);
 
   const [profileimage, setprofileimage] = useState("");
-  const [newprofileimg, setnewprofileimg] = useState("");
+
 
   const sendimagetoserver = async (e) => {
-    setisLoading(true);
+    setfileloading(true)
     e.preventDefault();
     const formData = new FormData();
     formData.set("file", profileimage);
@@ -67,16 +70,15 @@ const ProfilePage = () => {
         )}`,
       },
     });
-    setnewprofileimg(response.data);
+    setprofileimage(response.data);
+    setfileloading(false)
     fetchData();
     toast.success(
       "Profile image uploaded successfully. Please refresh the page ."
     );
-    setisLoading(false);
   };
 
   const editProfileData = async (e) => {
-    setisLoading(true);
     e.preventDefault();
     const { name, phone, qualification, institution, course } = data1;
     let response = await baseUrl.post('/student/updateprofile', JSON.stringify({ name, phone, qualification, institution, course }), {
@@ -87,7 +89,6 @@ const ProfilePage = () => {
       }
     });
     let d = response.data;
-    setisLoading(false);
     if (d) {
       toast.success("Profile Updated!")
     }
@@ -108,6 +109,7 @@ const ProfilePage = () => {
       }
     }
   };
+
   const [edit, setEdit] = useState(true);
   const makeEditable = () => {
     toast.success('Edit the field you want directly.')
@@ -122,12 +124,15 @@ const ProfilePage = () => {
         {/* 1 */}
         <div className="bg-[#E8EDF4] h-full px-12 py-10 flex flex-col items-center">
           <h3 className="mb-2 font-bold text-[3vh] font-[Poppins] tracking-[.5px]">Personal Details</h3>
-          <div>
-            <img
-              src={`${data.profileimg}`}
-              onClick={handleOpenprofileimg}
-              className="h-36 w-36 object-cover rounded-full"
-            />
+
+          <div className='h-36 w-36 flex items-center justify-center mx-auto'>
+            {fileloading ? (<FileLoader />) : (
+              <img
+                src={`${data.profileimg}`}
+                onClick={handleOpenprofileimg}
+                className="h-36 w-36 object-cover rounded-full"
+              />
+            )}
           </div>
           <Dialog open={openprofileimg} handler={handleOpenprofileimg}>
             <img src={`${data.profileimg}`} className="h-[90vh] w-full" />
@@ -162,7 +167,7 @@ const ProfilePage = () => {
         {/* 3 */}
         <div className="px-12 flex flex-col">
           <h3 className="font-[Poppins] font-bold text-[4vh]">My Courses</h3>
-          {data.joinedcourses ?
+          {data.joinedcourses > 0 ?
             data.joinedcourses.map((e) => {
               return (
                 <div className='p-4 w-72 mt-4 bg-[#E8EDF4] flex items-center justify-between'>
@@ -173,7 +178,7 @@ const ProfilePage = () => {
                 </div>
               )
             })
-            : <>No enrolled courses found</>}
+            : <>You haven't enrolled in any <br /> of the course yet.</>}
         </div>
       </div>
 

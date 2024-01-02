@@ -13,7 +13,6 @@ const CoursesList = () => {
     const navigate = useNavigate();
 
     const [isLoading, setisLoading] = useState(false)
-
     const [data, setdata] = useState([]);
 
     async function fetchData() {

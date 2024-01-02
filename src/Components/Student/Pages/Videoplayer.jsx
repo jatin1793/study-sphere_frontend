@@ -11,6 +11,7 @@ import { setlikedStatus } from "../../../store/reducers/likedSlice.js"
 
 import Navbar from '../Navbar.jsx'
 import Loader from '../../../Loader.jsx';
+import toast from 'react-hot-toast'
 
 import { Avatar } from "@material-tailwind/react";
 
@@ -57,7 +58,6 @@ const Videoplayer = () => {
     }
 
     const like = async (e) => {
-        setisLoading(true);
         e.preventDefault();
         let bodyContent = { "videoid": videoid };
         let response = await baseUrl.post(`/student/video/like/${videoid}`, bodyContent, {
@@ -67,7 +67,6 @@ const Videoplayer = () => {
             },
         });
         checkifliked(videodetails._id);
-        setisLoading(false);
         sendIDtoserver();
     }
 
@@ -104,7 +103,7 @@ const Videoplayer = () => {
                                 <div className='bg-[#E8EDF4] flex justify-between items-center w-[60vw] rounded-lg px-4 py-2'>
                                     <div className='flex gap-6 items-center jusify-center'>
                                         <Avatar size='lg' src={`${videodetails.instructor ? videodetails.instructor.profileimg : <></>}`} alt="avatar" />
-                                        <div><h6>{videodetails.instructor ? videodetails.instructor.name : <></>}</h6><small>followers</small></div>
+                                        <div><h6>{videodetails.instructor ? videodetails.instructor.name : <></>}</h6><small>{videodetails.instructor ? videodetails.instructor.followers.length : <></>} followers</small></div>
                                     </div>
                                     <div className='flex gap-2 p-2 border border-solid border-[black] rounded-3xl'>
                                         {liked.isLiked ? (

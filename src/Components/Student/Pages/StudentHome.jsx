@@ -151,21 +151,23 @@ const StudentHome = () => {
               <h3 className='font-[Poppins] text-[6vh] items-center mb-6 mr-6 flex'>Explore Best-In-Class Content</h3>
               <h6 className='text-[3vh] text-gray-700 items-center mb-6 mr-6 flex'>Choose from over 210,000 online video courses with new additions published every month</h6>
               <div className='flex w-[95vw] gap-6 overflow-x-auto no-scrollbar'>
-                {filteredData.reverse().map((item) => {
-                  return (
-                    <CourseCard
-                      courseposter={item.coursePoster}
-                      coursename={item.courseTitle}
-                      courseDomain={item.courseDomain}
-                      coursedate={item.courseDate.split('T')[0]}
-                      instructor={item.Instructor.name}
-                      courselength={item.courseVideos.length}
-                      courseid={item._id}
-                      coursedescription={item.courseDescription}
-                    />
-
-                  );
-                })}
+                {filteredData.length > 0 ?
+                  filteredData.reverse().map((item) => {
+                    return (
+                      <CourseCard
+                        courseposter={item.coursePoster}
+                        coursename={item.courseTitle}
+                        courseDomain={item.courseDomain}
+                        coursedate={item.courseDate.split('T')[0]}
+                        instructor={item.Instructor.name}
+                        courselength={item.courseVideos.length}
+                        courseid={item._id}
+                        coursedescription={item.courseDescription}
+                      />
+                    );
+                  }):
+                  <>No courses available. </>
+                }
               </div>
 
             </div>
@@ -175,7 +177,8 @@ const StudentHome = () => {
               <h2 className='py-4 text-[6vh] font-[Poppins]'>The Best Free Online Courses of <br /> All Time</h2>
               <h4 className='text-[3vh] text-gray-700 mb-10'>The highest rated online courses and MOOCs of all time from top universities around the <br /> world. Based on thousands of reviews written by Class Central users.</h4>
               <div className='flex w-[95vw] gap-6 overflow-x-auto no-scrollbar'>
-                {filteredData.reverse().map((item) => {
+                {filteredData.length > 0 ?
+                filteredData.reverse().map((item) => {
                   return (
                     <CourseCard
                       courseposter={item.coursePoster}
@@ -187,7 +190,8 @@ const StudentHome = () => {
                       courseid={item._id}
                     />
                   );
-                })}
+                }):<>No courses available. </>
+              }
               </div>
             </div>
 

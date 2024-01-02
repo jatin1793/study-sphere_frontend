@@ -100,7 +100,7 @@ const CourseVideos = () => {
                                 <h1 className='text-[8vh] font-black font-[Poppins] leading-tight'>{coursedata.courseTitle}</h1>
                                 <h3 className='mt-6 text-[2.5vh] text-gray-700'>{coursedata.courseDescription}</h3>
                             </div>
-                            <Button onClick={handleOpendeletecourse}>Delete Course</Button>
+                            <Button className='mt-4 z-1' onClick={handleOpendeletecourse}>Delete Course</Button>
                             <div className='mt-12'>
                                 <h3 className='p-4 bg-[#E8EDF4] mb-[4px] text-[3vh] font-bold'>Course Info</h3>
                                 <div className='p-4 bg-[#E8EDF4] flex gap-12 mb-[4px]'><h3 className='w-36'>Domain</h3><h3>{coursedata.courseDomain}</h3></div>

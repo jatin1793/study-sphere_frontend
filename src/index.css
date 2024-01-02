@@ -3,99 +3,141 @@
 @tailwind utilities;
 
 @layer utilities {
-  /* Hide scrollbar for Chrome, Safari and Opera */
   .no-scrollbar::-webkit-scrollbar {
-      display: none;
+    display: none;
   }
- /* Hide scrollbar for IE, Edge and Firefox */
+
   .no-scrollbar {
-      -ms-overflow-style: none;  /* IE and Edge */
-      scrollbar-width: none;  /* Firefox */
-}
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
 }
 
 ::placeholder {
   color: red;
-  opacity: 1; 
+  opacity: 1;
 }
 
-.box::-webkit-scrollbar{
-    display: none;
+.box::-webkit-scrollbar {
+  display: none;
 }
 
-.searchbar{
+.searchbar {
   box-shadow: 3px 3px #ff723f;
 }
+
 .loader {
-    width: 70px;
-    height: 70px;
-    margin: auto;
-    position: relative;
+  width: 70px;
+  height: 70px;
+  margin: auto;
+  position: relative;
+}
+
+.loader:before {
+  content: "";
+  width: 70px;
+  height: 5px;
+  /* background: #5553FF; */
+  background: #ff723f;
+  position: absolute;
+  top: 100px;
+  left: 0;
+  border-radius: 50%;
+  animation: shadow324 0.5s linear infinite;
+}
+
+.loader:after {
+  content: "";
+  width: 100%;
+  height: 100%;
+  /* background: #5553FF; */
+  background: #ff723f;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 4px;
+  animation: jump7456 0.5s linear infinite;
+}
+
+.kuhu {
+  overflow-y: scroll;
+  height: 89vh;
+}
+
+.coursecreate {
+  box-shadow: 0 0 15px -5px #444444;
+}
+
+@keyframes jump7456 {
+  15% {
+    border-bottom-right-radius: 3px;
   }
-  
-  .loader:before {
-    content: "";
-    width: 70px;
-    height: 5px;
-    /* background: #5553FF; */
-    background: #ff723f;
-    position: absolute;
-    top: 100px;
-    left: 0;
-    border-radius: 50%;
-    animation: shadow324 0.5s linear infinite;
+
+  25% {
+    transform: translateY(9px) rotate(22.5deg);
   }
-  
-  .loader:after {
-    content: "";
-    width: 100%;
-    height: 100%;
-    /* background: #5553FF; */
-    background: #ff723f;
-    position: absolute;
-    top: 0;
-    left: 0;
-    border-radius: 4px;
-    animation: jump7456 0.5s linear infinite;
+
+  50% {
+    transform: translateY(18px) scale(1, 0.9) rotate(45deg);
+    border-bottom-right-radius: 40px;
   }
-  .kuhu{
-    overflow-y: scroll;
-    height: 89vh;
+
+  75% {
+    transform: translateY(9px) rotate(67.5deg);
   }
-  .coursecreate{
-    box-shadow: 0 0 15px -5px #444444;
+
+  100% {
+    transform: translateY(0) rotate(90deg);
   }
-  @keyframes jump7456 {
-    15% {
-      border-bottom-right-radius: 3px;
-    }
-  
-    25% {
-      transform: translateY(9px) rotate(22.5deg);
-    }
-  
-    50% {
-      transform: translateY(18px) scale(1, 0.9) rotate(45deg);
-      border-bottom-right-radius: 40px;
-    }
-  
-    75% {
-      transform: translateY(9px) rotate(67.5deg);
-    }
-  
-    100% {
-      transform: translateY(0) rotate(90deg);
-    }
+}
+
+@keyframes shadow324 {
+
+  0%,
+  100% {
+    transform: scale(1, 1);
   }
-  
-  @keyframes shadow324 {
-    0%,
-    100% {
-      transform: scale(1, 1);
-    }
-  
-    50% {
-      transform: scale(1.2, 1);
-    }
+
+  50% {
+    transform: scale(1.2, 1);
   }
-  
+}
+
+
+
+
+
+
+
+
+
+.fileloader {
+  box-sizing: border-box;
+  position: absolute;
+  z-index: 9999999999999;
+  top: 50%;
+  left: 50%;
+  width: 48px;
+  height: 48px;
+  animation: spin 1s linear infinite;
+}
+.fileloader:after, .fileloader:before {
+  content: "";
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  border-radius: 50%;
+  background: #FF3D00;
+  animation: spin 1s linear infinite;
+  transform-origin: 0px 100%;
+}
+.fileloader:before {
+  transform-origin: 0 50%;
+  background: #ff723f;;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+    
