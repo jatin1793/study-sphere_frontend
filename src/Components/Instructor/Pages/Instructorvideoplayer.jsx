@@ -20,8 +20,6 @@ const Instructorvideoplayer = () => {
     const [isLoading, setisLoading] = useState(false)
     const [videodetails, setvideodetails] = useState({})
 
-    
-
     const sendIDtoserver = async () => {
         setisLoading(true)
         let bodyContent = JSON.stringify({ "videoid": videoid, });

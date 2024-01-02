@@ -11,7 +11,7 @@ import logo from '../images/logo.png'
 const Landing = () => {
     return (
         <div>
-            <div className='w-full mb-4  h-[4rem] flex justify-between px-6' style={{boxShadow: '0px 0px 15px -2px #444444'}}>
+            <div className='w-full mb-4  h-[4rem] flex justify-between px-6' style={{ boxShadow: '0px 0px 15px -2px #444444' }}>
                 <img src={logo} />
                 <div className='flex py-4 gap-4'>
                     <Link to="/student/signup-signin"><Button color='blue'>STUDENT LOGIN</Button> </Link>

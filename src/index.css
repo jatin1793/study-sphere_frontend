@@ -110,34 +110,3 @@
 
 
 
-
-.fileloader {
-  box-sizing: border-box;
-  position: absolute;
-  z-index: 9999999999999;
-  top: 50%;
-  left: 50%;
-  width: 48px;
-  height: 48px;
-  animation: spin 1s linear infinite;
-}
-.fileloader:after, .fileloader:before {
-  content: "";
-  width: 24px;
-  height: 24px;
-  position: absolute;
-  border-radius: 50%;
-  background: #FF3D00;
-  animation: spin 1s linear infinite;
-  transform-origin: 0px 100%;
-}
-.fileloader:before {
-  transform-origin: 0 50%;
-  background: #ff723f;;
-}
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-    

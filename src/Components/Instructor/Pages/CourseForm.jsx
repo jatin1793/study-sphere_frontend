@@ -31,8 +31,7 @@ const CourseForm = () => {
       formData.set('courseDomain', data.courseDomain)
       formData.set('courseDescription', data.courseDescription)
       formData.set('coursePrice', data.coursePrice)
-
-
+      
       const response = await baseUrl.post("/instructor/createcourse", formData, {
         headers: {
           authorization: `bearer ${JSON.parse(localStorage.getItem('instructor_token'))}`

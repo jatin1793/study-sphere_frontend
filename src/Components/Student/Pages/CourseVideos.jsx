@@ -27,7 +27,7 @@ const CourseVideos = () => {
     const sendIDtoserver = async () => {
         setisLoading(true);
         let bodyContent = JSON.stringify({ "courseid": id, });
-        
+
         let status = await baseUrl.post(`/student/checkifenrolled/${id}`, bodyContent, {
             headers: {
                 "Content-Type": "application/json",
@@ -36,7 +36,7 @@ const CourseVideos = () => {
         });
         dispatch(setEnrollmentStatus(status.data.isEnrolled));
         setcheckenroll(status.data.isEnrolled);
-        
+
         let response = await baseUrl.post(`/student/course/${id}`, bodyContent, {
             headers: {
                 "Content-Type": "application/json",

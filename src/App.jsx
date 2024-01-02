@@ -56,9 +56,9 @@ const App = () => {
           style: {
             background: '#5CB85C',
             color: 'white',
-            border:'0px solid green',
+            border: '0px solid green',
             zIndex: '99999999',
-            
+
           },
         },
         error: {

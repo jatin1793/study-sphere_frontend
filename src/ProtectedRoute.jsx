@@ -6,13 +6,13 @@ const ProtectedRoute = (props) => {
     const navigate = useNavigate();
     const { Component } = props;
 
-    useEffect(()=>{
+    useEffect(() => {
         let login = localStorage.getItem('student_token');
-        if(!login){
+        if (!login) {
             toast.error("Login first to access !!")
             navigate('/')
         }
-    },[])
+    }, [])
 
     return (
         <div>

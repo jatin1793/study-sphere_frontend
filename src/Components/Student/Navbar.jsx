@@ -57,7 +57,7 @@ const Navbars = (props) => {
   }, []);
 
   return (
-    <div className='flex gap-2 bg-white' style={{boxShadow: '0px 0px 15px -2px #444444'}}>
+    <div className='flex gap-2 bg-white' style={{ boxShadow: '0px 0px 15px -2px #444444' }}>
       <div className='justify-center items-center w-full' >
         <div className="px-6 py-2 text-white w-screen">
           <div className="flex items-center justify-between text-black">
@@ -104,7 +104,7 @@ const Navbars = (props) => {
 
             <div>
               <Link to='/student/profile' className='px-2 flex items-center gap-4 mb-2'>
-                <img src={data.profileimg} className='w-12 h-12 rounded-full object-center'/>
+                <img src={data.profileimg} className='w-12 h-12 rounded-full object-center' />
                 <h3>{data.name}</h3>
               </Link>
 

@@ -60,12 +60,6 @@ const StudentHome = () => {
     }
   }
 
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-
   const [inputText, setInputText] = useState("");
   let inputHandler = (e) => {
     var lowerCase = e.target.value.toLowerCase();
@@ -96,7 +90,9 @@ const StudentHome = () => {
     setisfollowed(response.data.isfollowed)
   }
 
-
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   return (
     isLoading ? (<Loader />) : (
@@ -165,7 +161,7 @@ const StudentHome = () => {
                         coursedescription={item.courseDescription}
                       />
                     );
-                  }):
+                  }) :
                   <>No courses available. </>
                 }
               </div>
@@ -178,20 +174,20 @@ const StudentHome = () => {
               <h4 className='text-[3vh] text-gray-700 mb-10'>The highest rated online courses and MOOCs of all time from top universities around the <br /> world. Based on thousands of reviews written by Class Central users.</h4>
               <div className='flex w-[95vw] gap-6 overflow-x-auto no-scrollbar'>
                 {filteredData.length > 0 ?
-                filteredData.reverse().map((item) => {
-                  return (
-                    <CourseCard
-                      courseposter={item.coursePoster}
-                      coursename={item.courseTitle}
-                      coursedescription={item.courseDomain}
-                      coursedate={item.courseDate.split('T')[0]}
-                      instructor={item.Instructor.name}
-                      courselength={item.courseVideos.length}
-                      courseid={item._id}
-                    />
-                  );
-                }):<>No courses available. </>
-              }
+                  filteredData.reverse().map((item) => {
+                    return (
+                      <CourseCard
+                        courseposter={item.coursePoster}
+                        coursename={item.courseTitle}
+                        coursedescription={item.courseDomain}
+                        coursedate={item.courseDate.split('T')[0]}
+                        instructor={item.Instructor.name}
+                        courselength={item.courseVideos.length}
+                        courseid={item._id}
+                      />
+                    );
+                  }) : <>No courses available. </>
+                }
               </div>
             </div>
 

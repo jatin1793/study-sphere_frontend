@@ -45,7 +45,7 @@ const SavedCourse = () => {
               {likedvideos.length > 0 ? (
                 likedvideos.reverse().map((item) => (
                   <VideoCard
-                    key={item._id} 
+                    key={item._id}
                     courseid={item.videoCourse._id}
                     videoid={item._id}
                     coursename={item.videoCourse.courseTitle}

@@ -34,19 +34,19 @@ const Studentsignin = () => {
     if (!phone || !email || !name || !password || !institution || !qualification || !course) {
       toast.error("Fill in all required fields !!! ")
     }
-    else if(phone.length > 10 || phone.length < 10 ){
+    else if (phone.length > 10 || phone.length < 10) {
       toast.error("Phone number should be of 10 digits.")
     }
     else if (email.length > 30 || email.length < 10) {
       toast.error("Email should in range of 10 to 30 characters. ")
     }
-    else if(name.length > 15 || name.length < 3 ){
+    else if (name.length > 15 || name.length < 3) {
       toast.error("Name should be in range of 3 to 15 chaacters. ")
     }
-    else if(password.length > 15 || password.length < 3 ){
+    else if (password.length > 15 || password.length < 3) {
       toast.error("Password should be in range of 3 to 15 chaacters. ")
     }
-   
+
     else {
       try {
         const response = await baseUrl.post('/student/register', {

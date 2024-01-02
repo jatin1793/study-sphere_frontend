@@ -49,13 +49,7 @@ const ProfilePage = () => {
 
   const submitref = useRef(null);
 
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
   const [profileimage, setprofileimage] = useState("");
-
 
   const sendimagetoserver = async (e) => {
     setfileloading(true)
@@ -115,6 +109,11 @@ const ProfilePage = () => {
     toast.success('Edit the field you want directly.')
     setEdit(!edit);
   }
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   return isLoading ? (
     <Loader />
   ) : (
