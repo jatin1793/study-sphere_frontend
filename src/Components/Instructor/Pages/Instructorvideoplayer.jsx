@@ -44,7 +44,7 @@ const Instructorvideoplayer = () => {
 
             <div className=''>
                 <NewNav />
-                <div className='px-8 py-6 flex'>
+                <div className='px-8 py-6 flex kuhu'>
 
                     <div className='w-[60vw] h-[60vh]'>
                         <MediaPlayer
