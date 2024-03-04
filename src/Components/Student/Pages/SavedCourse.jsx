@@ -35,6 +35,7 @@ const SavedCourse = () => {
     isLoading ? (<Loader />) : (
       <div className='w-full overflow-hidden'>
         <Navbar />
+        <div className='kuhu'>
         <div>
 
           <div className='w-[90vw] px-12 py-12'>
@@ -63,7 +64,7 @@ const SavedCourse = () => {
         </div>
         <div className='mt-48'>
           <Footer />
-        </div>
+        </div></div>
       </div>
     )
   )

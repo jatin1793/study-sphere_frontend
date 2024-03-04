@@ -22,6 +22,9 @@ const CourseForm = () => {
     if (!file) {
       toast.error('Please select a file.');
     }
+    else if (data.courseTitle.length > 20 || data.courseTitle.length < 3) {
+      toast.error("Course title should be in range of 3 to 15 chaacters. ")
+    }
     else {
       setfileloading(true);
 
@@ -73,7 +76,7 @@ const CourseForm = () => {
                     <Input color="indigo" label="Domain" value={data.courseDomain} onChange={(e) => { setData({ ...data, courseDomain: e.target.value }) }} />
                     <Textarea color="indigo" value={data.courseDescription} onChange={(e) => { setData({ ...data, courseDescription: e.target.value }) }} label="Description" />
                   </div>
-                  <Button className="mt-6 bg-[#9179F5]" type='submit' fullWidth >Create</Button>
+                  <Button className="mt-4 bg-[#9179F5]" type='submit' fullWidth >Create</Button>
                 </form>
 
               </div>

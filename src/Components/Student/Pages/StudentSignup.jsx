@@ -146,18 +146,18 @@ const Studentsignin = () => {
                           <Input icon={<LockOutlinedIcon className='text-[#ff723f]' />} color='deep-orange' type="password" label="Password" onChange={(e) => { setInputs({ ...inputs, password: e.target.value }) }} />
                           <Input color='deep-orange' type="name" label="Institution name" onChange={(e) => { setInputs({ ...inputs, institution: e.target.value }) }} />
                           <Select color='deep-orange' label="Select Qualification" onChange={(e) => { setInputs({ ...inputs, qualification: e }) }}>
-                            <Option value='Material Tailwind HTML'>Material Tailwind HTML</Option>
-                            <Option value='Material Tailwind React'>Material Tailwind React</Option>
-                            <Option value='Material Tailwind Vue'>Material Tailwind Vue</Option>
-                            <Option value='Material Tailwind Angular'>Material Tailwind Angular</Option>
-                            <Option value='Material Tailwind Svelte'>Material Tailwind Svelte</Option>
+                            <Option value='Secondary Education'>Secondary Education</Option>
+                            <Option value='Higher secondary (10+12)'>Higher secondary (10+12)</Option>
+                            <Option value='Under graduate'>Under graduate</Option>
+                            <Option value='Post graduate'>Post graduate</Option>
+                            {/* <Option value='Material Tailwind Svelte'></Option> */}
                           </Select>
                           <Select color='deep-orange' label="Select Course" onChange={(e) => { setInputs({ ...inputs, course: e }) }}>
-                            <Option value='Material Tailwind HTML'>Material Tailwind HTML</Option>
-                            <Option value='Material Tailwind React'>Material Tailwind React</Option>
-                            <Option value='Material Tailwind Vue'>Material Tailwind Vue</Option>
-                            <Option value='Material Tailwind Angular'>Material Tailwind Angular</Option>
-                            <Option value='Material Tailwind Svelte'>Material Tailwind Svelte</Option>
+                            <Option value='10+12'>10+12</Option>
+                            <Option value='B.tech'>B.tech</Option>
+                            <Option value='B.com/M.com'>B.com/M.com</Option>
+                            <Option value='B.Sc/M.sc'>B.Sc/M.sc</Option>
+                            <Option value='B.A/M.A'>B.A/M.A</Option>
                           </Select>
                         </div>
                         <button className='bg-[#ff723f] rounded-[5px] font-medium  font-[gilroy] text-[white] p-2' type='submit' >Register</button>

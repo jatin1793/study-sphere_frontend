@@ -4,11 +4,8 @@ import '../../../index.css'
 import baseUrl from '../../../utils/baseUrl.js';
 import toast from 'react-hot-toast'
 import DeleteIcon from '@mui/icons-material/Delete';
-
-
 import Loader from '../../../Loader.jsx';
 import NewNav from '../NewNav.jsx'
-
 import { Button } from "@material-tailwind/react";
 import {
     Dialog,
@@ -16,9 +13,7 @@ import {
     DialogBody,
     DialogFooter,
 } from "@material-tailwind/react";
-
 import PlayCircleIcon from '@mui/icons-material/PlayCircle';
-
 
 const CourseVideos = () => {
 
@@ -26,14 +21,10 @@ const CourseVideos = () => {
     const navigate = useNavigate();
     const [isLoading, setisLoading] = useState(false)
     const [coursedata, setcoursedata] = useState([])
-
     const [opendeletecourse, setOpendeletecourse] = useState(false);
     const handleOpendeletecourse = () => setOpendeletecourse(!opendeletecourse);
-
     const [opendeletevideo, setOpendeletevideo] = useState(false);
     const handleOpendeletevideo = () => setOpendeletevideo(!opendeletevideo);
-
-
     const sendIDtoserver = async () => {
         setisLoading(true)
         let bodyContent = JSON.stringify({ "courseid": id, });
@@ -92,7 +83,7 @@ const CourseVideos = () => {
         isLoading ? (<Loader />) : (
             <div className='h-full w-full overflow-hidden'>
                 <NewNav />
-                <div className='py-12 px-24'>
+                <div className='kuhu py-12 px-24'>
 
                     <div className='flex gap-36'>
                         <div>
@@ -167,7 +158,7 @@ const CourseVideos = () => {
                     </div>
 
                 </div>
-
+                                    
                 <Dialog open={opendeletecourse} handler={handleOpendeletecourse}>
                     <DialogBody>
                         Are you sure you want to delete the course ?? All the lectures of this course will be deleted .
