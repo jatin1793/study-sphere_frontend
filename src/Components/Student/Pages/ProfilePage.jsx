@@ -42,6 +42,7 @@ const ProfilePage = () => {
     }
   }
 
+
   const inputref = useRef(null);
   const handleInputClick = () => {
     inputref.current.click();
@@ -166,19 +167,20 @@ const ProfilePage = () => {
         {/* 3 */}
         <div className="px-12 flex flex-col">
           <h3 className="font-[Poppins] font-bold text-[4vh]">My Courses</h3>
-          {data.joinedcourses > 0 ?
-            data.joinedcourses.map((e) => {
-              return (
-                <div className='p-4 w-72 mt-4 bg-[#E8EDF4] flex items-center justify-between'>
-                  <div className='flex gap-6'>
-                    <LibraryBooksIcon className='text-gray' />
-                    <h3>{e.courseTitle}</h3>
-                  </div>
+          {data && data.joinedcourses && data.joinedcourses.length > 0 ? (
+            data.joinedcourses.map((e, index) => (
+              <div key={index} className='p-4 w-72 mt-4 bg-[#E8EDF4] flex items-center justify-between'>
+                <div className='flex gap-6'>
+                  <LibraryBooksIcon className='text-gray' />
+                  <h3>{e.courseTitle}</h3>
                 </div>
-              )
-            })
-            : <>You haven't enrolled in any <br /> of the course yet.</>}
+              </div>
+            ))
+          ) : (
+            <>You haven't enrolled in any <br /> of the course yet.</>
+          )}
         </div>
+
       </div>
 
       <div className="mt-[500px]"><Footer /></div>
